@@ -8,12 +8,12 @@ import useStyles from "./Style";
 function Header() {
   const classes = useStyles();
   return (
-    <AppBar position="static">
+    <AppBar position="static" className={classes.appBar}>
       <Toolbar>
-        <Typography variant="h6" className={classes.title}>
+        <Typography variant="h6" className={classes.title} color="primary">
           DIA
         </Typography>
-        <IconButton edge="end" className={classes.menuButton} color="inherit">
+        <IconButton edge="end" className={classes.menuButton} color="primary">
           <Menu />
         </IconButton>
       </Toolbar>
