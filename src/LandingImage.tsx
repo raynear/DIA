@@ -13,6 +13,14 @@ function LandingImage() {
         className={classes.mainCopy}
         color="textSecondary"
       >
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
         A Diamond is forever - De Beers
       </Typography>
     </Box>

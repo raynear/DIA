@@ -1,5 +1,6 @@
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
-import DiaImg from "./dia.jpg";
+import DiaMain from "./dia_main.jpg";
+
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -7,11 +8,32 @@ const useStyles = makeStyles((theme: Theme) =>
       background: "transparent",
       boxShadow: "none"
     },
+    list: {
+      width: 250,
+    },
+    fullList: {
+      width: 'auto',
+    },
     root: {
       flexGrow: 1
     },
     menuButton: {
       marginRight: theme.spacing(2)
+    },
+    container: {
+      width: "100%",
+      spacing: theme.spacing(0),
+      margin: theme.spacing(0),
+      padding: theme.spacing(0),
+      display: "flex",
+      flexwrap: "wrap"
+    },
+    grid: {
+      margin: theme.spacing(0),
+      padding: theme.spacing(1)
+    },
+    img: {
+      width: "100%"
     },
     title: {
       flexGrow: 1
@@ -21,7 +43,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     landingImg: {
       height: 500,
-      backgroundImage: `url(${DiaImg})`,
+      backgroundImage: `url(${DiaMain})`,
       backgroundRepeat: "no-repeat",
       backgroundPosition: "center",
       textAlign: "center",

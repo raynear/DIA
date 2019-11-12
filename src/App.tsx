@@ -5,6 +5,7 @@ import LandingImage from "./LandingImage";
 import LandingContents from "./LandingContents";
 
 function App() {
+
   return (
     <div className="App">
       <Header />
