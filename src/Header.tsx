@@ -8,7 +8,7 @@ import useStyles from "./Style";
 function Header() {
   const classes = useStyles();
   return (
-    <AppBar position="static" className={classes.appBar}>
+    <AppBar position="fixed" className={classes.appBar}>
       <Toolbar>
         <Typography variant="h6" className={classes.title} color="primary">
           DIA

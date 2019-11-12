@@ -1,4 +1,5 @@
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
+import DiaImg from "./dia.jpg";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -14,6 +15,17 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     title: {
       flexGrow: 1
+    },
+    mainCopy: {
+      color: "#ffffff"
+    },
+    landingImg: {
+      height: 500,
+      backgroundImage: `url(${DiaImg})`,
+      backgroundRepeat: "no-repeat",
+      backgroundPosition: "center",
+      textAlign: "center",
+      verticalAlign: "middle"
     }
   })
 );
