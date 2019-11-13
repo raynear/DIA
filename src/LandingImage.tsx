@@ -21,7 +21,7 @@ function LandingImage() {
         <br />
         <br />
         <br />
-        A Diamond is forever - De Beers
+        A Diamond is forever
       </Typography>
     </Box>
   );
