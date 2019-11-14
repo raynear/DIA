@@ -4,6 +4,19 @@ import DiaMain from "./dia_main.jpg";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
+    rootcontainer: {
+      spacing: theme.spacing(0),
+      margin: theme.spacing(0),
+      padding: theme.spacing(1),
+      display: "flex",
+      flexwrap: "wrap"
+    },
+    appBarSpacer: theme.mixins.toolbar,
+    content: {
+      flexGrow: 1,
+      height: "100vh",
+      overflow: "auto"
+    },
     appBar: {
       background: "transparent",
       boxShadow: "none"
@@ -31,6 +44,12 @@ const useStyles = makeStyles((theme: Theme) =>
     grid: {
       margin: theme.spacing(0),
       padding: theme.spacing(1)
+    },
+    table: {
+      minWidth: 500,
+    },
+    tableWrapper: {
+      overflowX: 'auto',
     },
     img: {
       width: "100%"
