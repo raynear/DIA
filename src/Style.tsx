@@ -24,8 +24,24 @@ const useStyles = makeStyles((theme: Theme) =>
     list: {
       width: 250,
     },
+    formControl: {
+      margin: theme.spacing(1),
+      minWidth: 120,
+    },
+    selectEmpty: {
+      marginTop: theme.spacing(2),
+    },
     fullList: {
       width: 'auto',
+    },
+    tablehead: {
+      backgroundColor: "#aaaaaa",
+      color: "#FFFFFF",
+      fontWeight: "bold"
+    },
+    pagination: {
+      flexShrink: 0,
+      marginLeft: theme.spacing(2.5)
     },
     root: {
       flexGrow: 1
@@ -43,7 +59,8 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     grid: {
       margin: theme.spacing(0),
-      padding: theme.spacing(1)
+      padding: theme.spacing(1),
+      textAlign: "center"
     },
     table: {
       minWidth: 500,

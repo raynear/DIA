@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { useTheme } from '@material-ui/core';
-import { Container, Paper, Grid, Table, TableBody, TableCell, TableFooter, TablePagination, TableRow, IconButton, Button } from "@material-ui/core";
+import { Container, Paper, Grid, Table, TableHead, TableBody, TableCell, TableFooter, TablePagination, TableRow, IconButton, Button } from "@material-ui/core";
 import { FirstPage, KeyboardArrowLeft, KeyboardArrowRight, LastPage } from '@material-ui/icons';
 
 import useStyles from "./Style";
@@ -35,7 +35,7 @@ function TablePaginationActions(props: ITablePaginationActionsProps) {
   };
 
   return (
-    <div className={classes.root}>
+    <div className={classes.pagination}>
       <IconButton
         onClick={handleFirstPageButtonClick}
         disabled={page === 0}
@@ -64,31 +64,41 @@ function TablePaginationActions(props: ITablePaginationActionsProps) {
   );
 }
 
-function createData(name: string, calories: number, fat: number) {
-  return { name, calories, fat };
+function createData(Merchant: string, Clarity: string, Cut: string, Carat: string, Color: string, Price: number, Certification: string, Datetime: string) {
+  return { Merchant, Clarity, Cut, Carat, Color, Price, Certification, Datetime };
 }
 
 const rows = [
-  createData('Cupcake', 305, 3.7),
-  createData('Donut', 452, 25.0),
-  createData('Eclair', 262, 16.0),
-  createData('Frozen yoghurt', 159, 6.0),
-  createData('Gingerbread', 356, 16.0),
-  createData('Honeycomb', 408, 3.2),
-  createData('Ice cream sandwich', 237, 9.0),
-  createData('Jelly Bean', 375, 0.0),
-  createData('KitKat', 518, 26.0),
-  createData('Lollipop', 392, 0.2),
-  createData('Marshmallow', 318, 0),
-  createData('Nougat', 360, 19.0),
-  createData('Oreo', 437, 18.0),
-].sort((a, b) => (a.calories < b.calories ? -1 : 1));
+  createData('Cupcake', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10/ 18:35'),
+  createData('Donut', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10 18:35'),
+  createData('Eclair', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10 18:35'),
+  createData('Frozen yoghurt', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10 18:35'),
+  createData('Gingerbread', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10 18:35'),
+  createData('Honeycomb', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10 18:35'),
+  createData('Ice cream sandwich', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10 18:35'),
+  createData('Jelly Bean', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10 18:35'),
+  createData('KitKat', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10 18:35'),
+  createData('Jelly Bean', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10 18:35'),
+  createData('KitKat', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10 18:35'),
+  createData('Jelly Bean', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10 18:35'),
+  createData('KitKat', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10 18:35'),
+  createData('Jelly Bean', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10 18:35'),
+  createData('KitKat', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10 18:35'),
+  createData('Lollipop', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10 18:35'),
+  createData('Marshmallow', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10 18:35'),
+  createData('Jelly Bean', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10 18:35'),
+  createData('KitKat', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10 18:35'),
+  createData('Jelly Bean', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10 18:35'),
+  createData('KitKat', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10 18:35'),
+  createData('Nougat', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10 18:35'),
+  createData('Oreo', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10 18:35'),
+].sort((a, b) => (a.Datetime < b.Datetime ? -1 : 1));
 
 function Dashboard() {
   const classes = useStyles();
 
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
@@ -102,36 +112,52 @@ function Dashboard() {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
+  // { Merchant, Clarity, Cut, Carat, Color, Price, Certification, Datetime };
   return (
     <>
       <div className={classes.appBarSpacer} />
       <Container maxWidth="lg" className={classes.rootcontainer}>
         <Grid container={true} className={classes.container}>
           <Grid item={true} xs={12} md={12} lg={12}>
-            <Paper>
-              <Button>New Post</Button>
-              <Table className={classes.table}>
+            <Paper style={{ textAlign: "right" }}>
+              <Button href="/NewPost">New Post</Button>
+              <Table className={classes.table} size="small">
+                <TableHead>
+                  <TableRow>
+                    <TableCell className={classes.tablehead}>Merchant</TableCell>
+                    <TableCell className={classes.tablehead} align="center">Clarity</TableCell>
+                    <TableCell className={classes.tablehead} align="center">Cut</TableCell>
+                    <TableCell className={classes.tablehead} align="center">Carat</TableCell>
+                    <TableCell className={classes.tablehead} align="center">Color</TableCell>
+                    <TableCell className={classes.tablehead} align="center">Price</TableCell>
+                    <TableCell className={classes.tablehead} align="center">Certification</TableCell>
+                    <TableCell className={classes.tablehead} align="center">Datetime</TableCell>
+                  </TableRow>
+                </TableHead>
                 <TableBody>
                   {(rowsPerPage > 0 ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage) : rows).map((row: any) => (
                     <TableRow key={row.name}>
-                      <TableCell component="th" scope="row">
-                        {row.name}
-                      </TableCell>
-                      <TableCell align="right">{row.calories}</TableCell>
-                      <TableCell align="right">{row.fat}</TableCell>
+                      <TableCell>{row.Merchant}</TableCell>
+                      <TableCell align="center">{row.Clarity}</TableCell>
+                      <TableCell align="center">{row.Cut}</TableCell>
+                      <TableCell align="center">{row.Carat}</TableCell>
+                      <TableCell align="center">{row.Color}</TableCell>
+                      <TableCell align="right">{row.Price}</TableCell>
+                      <TableCell align="right">{row.Certification}</TableCell>
+                      <TableCell align="right">{row.Datetime}</TableCell>
                     </TableRow>
                   ))}
                   {emptyRows > 0 && (
                     <TableRow style={{ height: 53 * emptyRows }}>
-                      <TableCell colSpan={6} />
+                      <TableCell colSpan={8} />
                     </TableRow>
                   )}
                 </TableBody>
                 <TableFooter>
                   <TableRow>
                     <TablePagination
-                      rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
-                      colSpan={3}
+                      rowsPerPageOptions={[10, 20, { label: 'All', value: -1 }]}
+                      colSpan={8}
                       count={rows.length}
                       rowsPerPage={rowsPerPage}
                       page={page}
@@ -142,8 +168,8 @@ function Dashboard() {
                       onChangePage={handleChangePage}
                       onChangeRowsPerPage={handleChangeRowsPerPage}
                       ActionsComponent={TablePaginationActions}
-                    />>
-              </TableRow>
+                    />
+                  </TableRow>
                 </TableFooter>
               </Table>
             </Paper>

@@ -1,5 +1,6 @@
 {
     "rules": {
+        "no-console": 0,
         "ordered-imports": false,
         "object-literal-sort-keys": false
     },
