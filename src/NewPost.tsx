@@ -32,10 +32,10 @@ function NewPost() {
   function submit() {
     (window as any).web3.eth.getBlockNumber((e: any, r: any) => {
       if (e) {
-        console.log(e);
+        //        console.log(e);
         return e;
       } else {
-        console.log(r);
+        //        console.log(r);
         setLog(r);
         return r;
       }

@@ -5,25 +5,22 @@ import { Typography, Container, Grid, Paper, Button } from "@material-ui/core";
 import Web3 from "web3";
 
 import useStyles from "./Style";
-import { ContractAddress, ContractABI } from "./ContractInfo";
+// import { ContractAddress, ContractABI } from "./ContractInfo";
 
 
 // interface FourC { clarity: '', cut: '', carat: '', color: '' }
 
 function Post({ match }: any) {
   const classes = useStyles();
-  const id = match.params.id;
+  //  const id = match.params.id;
 
-  const inputLabel = React.useRef<HTMLLabelElement>(null);
+  //  const inputLabel = React.useRef<HTMLLabelElement>(null);
 
   const [log, setLog] = useState();
-  const [fourC, setFourC] = useState({ clarity: '', cut: '', carat: '', color: '' })
+  const fourC = { clarity: '', cut: '', carat: '', color: '' };
 
   //  const web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545/'));
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setFourC({ ...fourC, [event.target.name]: event.target.value });
-  };
 
   window.addEventListener('load', async () => {
     if ((window as any).web3) {
@@ -34,10 +31,10 @@ function Post({ match }: any) {
   function submit() {
     (window as any).web3.eth.getBlockNumber((e: any, r: any) => {
       if (e) {
-        console.log(e);
+        //        console.log(e);
         return e;
       } else {
-        console.log(r);
+        //        console.log(r);
         setLog(r);
         return r;
       }
@@ -53,22 +50,13 @@ function Post({ match }: any) {
             <Paper style={{ textAlign: "right" }}>
               <Grid container={true} className={classes.container}>
                 <Grid item={true} className={classes.grid} xs={12} md={6} lg={6}>
-                  <Typography
-                    id="Subject"
-                    name="subject"
-                  >제목</Typography>
+                  <Typography>제목</Typography>
                 </Grid>
                 <Grid item={true} className={classes.grid} xs={12} md={6} lg={6}>
-                  <Typography
-                    id="Price"
-                    name="price"
-                  >가격</Typography>
+                  <Typography>가격</Typography>
                 </Grid>
                 <Grid item={true} className={classes.grid} xs={12} md={6} lg={6}>
-                  <Typography
-                    id="Certification"
-                    name="certification"
-                  >감정 정보</Typography>
+                  <Typography>감정 정보</Typography>
                 </Grid>
                 <Grid item={true} className={classes.grid} xs={6} md={3} lg={3}>
                   <Typography>
