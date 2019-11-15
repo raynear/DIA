@@ -1,9 +1,11 @@
 import * as React from 'react';
 import { useState } from 'react';
 
-import { TextField, Container, Grid, Paper, FormControl, InputLabel, Select, MenuItem, Button } from "@material-ui/core";
+import { Typography, TextField, Container, Grid, Paper, FormControl, InputLabel, Select, MenuItem, Button } from "@material-ui/core";
 
 import useStyles from "./Style";
+
+import Web3 from "web3";
 
 // interface FourC { clarity: '', cut: '', carat: '', color: '' }
 
@@ -12,16 +14,32 @@ function NewPost() {
 
   const inputLabel = React.useRef<HTMLLabelElement>(null);
 
+  const [log, setLog] = useState();
   const [fourC, setFourC] = useState({ clarity: '', cut: '', carat: '', color: '' })
+
+  //  const web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545/'));
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setFourC({ ...fourC, [event.target.name]: event.target.value });
   };
 
+  window.addEventListener('load', async () => {
+    if ((window as any).web3) {
+      (window as any).web3 = new Web3((window as any).web3.currentProvider);
+    }
+  });
+
   function submit() {
-    /* eslint-disable no-console */
-    // console.log("submit");
-    return "submit";
+    (window as any).web3.eth.getBlockNumber((e: any, r: any) => {
+      if (e) {
+        console.log(e);
+        return e;
+      } else {
+        console.log(r);
+        setLog(r);
+        return r;
+      }
+    });
   }
 
   return (
@@ -187,6 +205,7 @@ function NewPost() {
           </Grid>
         </Grid>
       </Container>
+      <Typography>{log}</Typography>
     </>
   );
 }
