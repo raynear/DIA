@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { Typography, Container, Grid, Paper, Button } from "@material-ui/core";
 import Web3 from "web3";
@@ -14,13 +14,14 @@ function Post({ match }: any) {
   const classes = useStyles();
   //  const id = match.params.id;
 
-  //  const inputLabel = React.useRef<HTMLLabelElement>(null);
-
+  const [values, setValues] = useState({ clarity: '', cut: '', carat: '', color: '', price: 0, id: '', celler: '', certinfo: '' })
   const [log, setLog] = useState();
-  const fourC = { clarity: '', cut: '', carat: '', color: '' };
 
-  //  const web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545/'));
+  useEffect(() => {
+    // const web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545/'));
 
+    setValues({ clarity: 'VVS', cut: 'Good', carat: '3/4', color: 'F', price: 4000000, id: match.params.ID, celler: 'AA 도매상', certinfo: 'BB에서 인증 되었음' });
+  }, [])
 
   window.addEventListener('load', async () => {
     if ((window as any).web3) {
@@ -50,36 +51,39 @@ function Post({ match }: any) {
             <Paper style={{ textAlign: "right" }}>
               <Grid container={true} className={classes.container}>
                 <Grid item={true} className={classes.grid} xs={12} md={6} lg={6}>
-                  <Typography>제목</Typography>
+                  <Typography>매물 ID: {values.id}</Typography>
                 </Grid>
                 <Grid item={true} className={classes.grid} xs={12} md={6} lg={6}>
-                  <Typography>가격</Typography>
+                  <Typography>판매자: {values.celler}</Typography>
+                </Grid>
+                <Grid item={true} className={classes.grid} xs={12} md={6} lg={6}>
+                  <Typography>가격: {values.price}</Typography>
                 </Grid>
                 <Grid item={true} className={classes.grid} xs={12} md={6} lg={6}>
                   <Typography>감정 정보</Typography>
                 </Grid>
                 <Grid item={true} className={classes.grid} xs={6} md={3} lg={3}>
                   <Typography>
-                    Carat: {fourC.carat}
+                    Carat: {values.carat}
                   </Typography>
                 </Grid>
                 <Grid item={true} className={classes.grid} xs={6} md={3} lg={3}>
                   <Typography>
-                    Clarity: {fourC.clarity}
+                    Clarity: {values.clarity}
                   </Typography>
                 </Grid>
                 <Grid item={true} className={classes.grid} xs={6} md={3} lg={3}>
                   <Typography>
-                    Cut: {fourC.cut}
+                    Cut: {values.cut}
                   </Typography>
                 </Grid>
                 <Grid item={true} className={classes.grid} xs={6} md={3} lg={3}>
                   <Typography>
-                    Color: {fourC.color}
+                    Color: {values.color}
                   </Typography>
                 </Grid>
                 <Grid item={true} className={classes.grid} xs={12} md={12} lg={12}>
-                  <Button fullWidth={true} variant="contained" color="primary" onClick={submit}>제출</Button>
+                  <Button fullWidth={true} variant="contained" color="primary" onClick={submit}>살께요!</Button>
                 </Grid>
               </Grid>
             </Paper>

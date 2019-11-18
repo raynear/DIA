@@ -1,7 +1,7 @@
 {
   "name": "dia",
   "version": "0.1.0",
-  "homepage": "https://raynear.github.io/dia/",
+  "homepage": "https://raynear.github.io/DIA/",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.6.0",

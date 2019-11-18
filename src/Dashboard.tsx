@@ -64,37 +64,37 @@ function TablePaginationActions(props: ITablePaginationActionsProps) {
   );
 }
 
-function createData(Merchant: string, Clarity: string, Cut: string, Carat: string, Color: string, Price: number, Certification: string, Datetime: string) {
-  return { Merchant, Clarity, Cut, Carat, Color, Price, Certification, Datetime };
+function createData(ID: number, Merchant: string, Clarity: string, Cut: string, Carat: string, Color: string, Price: number, Certification: string, Datetime: string) {
+  return { ID, Merchant, Clarity, Cut, Carat, Color, Price, Certification, Datetime };
 }
 
 const rows = [
-  createData('Cupcake', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10/ 18:35'),
-  createData('Donut', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10 18:35'),
-  createData('Eclair', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10 18:35'),
-  createData('Frozen yoghurt', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10 18:35'),
-  createData('Gingerbread', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10 18:35'),
-  createData('Honeycomb', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10 18:35'),
-  createData('Ice cream sandwich', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10 18:35'),
-  createData('Jelly Bean', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10 18:35'),
-  createData('KitKat', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10 18:35'),
-  createData('Jelly Bean', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10 18:35'),
-  createData('KitKat', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10 18:35'),
-  createData('Jelly Bean', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10 18:35'),
-  createData('KitKat', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10 18:35'),
-  createData('Jelly Bean', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10 18:35'),
-  createData('KitKat', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10 18:35'),
-  createData('Lollipop', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10 18:35'),
-  createData('Marshmallow', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10 18:35'),
-  createData('Jelly Bean', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10 18:35'),
-  createData('KitKat', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10 18:35'),
-  createData('Jelly Bean', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10 18:35'),
-  createData('KitKat', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10 18:35'),
-  createData('Nougat', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10 18:35'),
-  createData('Oreo', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10 18:35'),
+  createData(0, 'Cupcake', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10/ 18:35'),
+  createData(1, 'Donut', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10 18:35'),
+  createData(2, 'Eclair', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10 18:35'),
+  createData(3, 'Frozen yoghurt', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10 18:35'),
+  createData(4, 'Gingerbread', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10 18:35'),
+  createData(5, 'Honeycomb', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10 18:35'),
+  createData(6, 'Ice cream sandwich', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10 18:35'),
+  createData(7, 'Jelly Bean', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10 18:35'),
+  createData(8, 'KitKat', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10 18:35'),
+  createData(9, 'Jelly Bean', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10 18:35'),
+  createData(10, 'KitKat', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10 18:35'),
+  createData(11, 'Jelly Bean', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10 18:35'),
+  createData(12, 'KitKat', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10 18:35'),
+  createData(13, 'Jelly Bean', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10 18:35'),
+  createData(14, 'KitKat', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10 18:35'),
+  createData(15, 'Lollipop', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10 18:35'),
+  createData(16, 'Marshmallow', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10 18:35'),
+  createData(17, 'Jelly Bean', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10 18:35'),
+  createData(18, 'KitKat', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10 18:35'),
+  createData(19, 'Jelly Bean', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10 18:35'),
+  createData(20, 'KitKat', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10 18:35'),
+  createData(21, 'Nougat', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10 18:35'),
+  createData(22, 'Oreo', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10 18:35'),
 ].sort((a, b) => (a.Datetime < b.Datetime ? -1 : 1));
 
-function Dashboard() {
+function Dashboard(props: any) {
   const classes = useStyles();
 
   const [page, setPage] = React.useState(0);
@@ -112,6 +112,11 @@ function Dashboard() {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
+
+  const handleClick = (e: React.MouseEvent<unknown>, name: string) => {
+    console.log(rows[name]);
+    props.history.push("/Post/" + name.toString());
+  }
   // { Merchant, Clarity, Cut, Carat, Color, Price, Certification, Datetime };
   return (
     <>
@@ -124,6 +129,7 @@ function Dashboard() {
               <Table className={classes.table} size="small">
                 <TableHead>
                   <TableRow>
+                    <TableCell className={classes.tablehead}>ID</TableCell>
                     <TableCell className={classes.tablehead}>Merchant</TableCell>
                     <TableCell className={classes.tablehead} align="center">Clarity</TableCell>
                     <TableCell className={classes.tablehead} align="center">Cut</TableCell>
@@ -136,7 +142,8 @@ function Dashboard() {
                 </TableHead>
                 <TableBody>
                   {(rowsPerPage > 0 ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage) : rows).map((row: any) => (
-                    <TableRow key={row.name}>
+                    <TableRow key={row.ID} hover={true} onClick={(e) => handleClick(e, row.ID)}>
+                      <TableCell align="center">{row.ID}</TableCell>
                       <TableCell>{row.Merchant}</TableCell>
                       <TableCell align="center">{row.Clarity}</TableCell>
                       <TableCell align="center">{row.Cut}</TableCell>
