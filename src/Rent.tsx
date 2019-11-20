@@ -10,12 +10,11 @@ import useStyles from "./Style";
 
 // interface FourC { clarity: '', cut: '', carat: '', color: '' }
 
-function Post({ match }: any) {
+function Rent({ match }: any) {
   const classes = useStyles();
   //  const id = match.params.id;
 
   const [values, setValues] = useState({ clarity: '', cut: '', carat: '', color: '', price: 0, id: '', celler: '', certinfo: '' })
-  const [log, setLog] = useState();
 
   useEffect(() => {
     setValues({ clarity: 'VVS', cut: 'Good', carat: '3/4', color: 'F', price: 4000000, id: match.params.ID, celler: 'AA 도매상', certinfo: 'BB에서 인증 되었음' });
@@ -31,11 +30,10 @@ function Post({ match }: any) {
     console.log((window as any).web3.currentProvider.selectedAddress);
     (window as any).web3.eth.getBlockNumber((e: any, r: any) => {
       if (e) {
-        //        console.log(e);
+        console.log(e);
         return e;
       } else {
-        //        console.log(r);
-        setLog(r);
+        console.log(r);
         return r;
       }
     });
@@ -81,17 +79,19 @@ function Post({ match }: any) {
                     Color: {values.color}
                   </Typography>
                 </Grid>
-                <Grid item={true} className={classes.grid} xs={12} md={12} lg={12}>
-                  <Button fullWidth={true} variant="contained" color="primary" onClick={submit}>살께요!</Button>
+                <Grid item={true} className={classes.grid} xs={6} md={6} lg={6}>
+                  <Button fullWidth={true} variant="contained" color="primary" onClick={submit}>환불!</Button>
+                </Grid>
+                <Grid item={true} className={classes.grid} xs={6} md={6} lg={6}>
+                  <Button fullWidth={true} variant="contained" color="primary" onClick={submit}>판매완료(송금)!</Button>
                 </Grid>
               </Grid>
             </Paper>
           </Grid>
         </Grid>
       </Container>
-      <Typography>{log}</Typography>
     </>
   );
 }
 
-export default Post;
+export default Rent;

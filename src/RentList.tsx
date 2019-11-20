@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { useTheme } from '@material-ui/core';
-import { Container, Paper, Grid, Table, TableHead, TableBody, TableCell, TableFooter, TablePagination, TableRow, IconButton, Button } from "@material-ui/core";
+import { Container, Paper, Grid, Table, TableHead, TableBody, TableCell, TableFooter, TablePagination, TableRow, IconButton } from "@material-ui/core";
 import { FirstPage, KeyboardArrowLeft, KeyboardArrowRight, LastPage } from '@material-ui/icons';
 
 import useStyles from "./Style";
@@ -94,7 +94,7 @@ const rows = [
   createData(22, 'Oreo', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10 18:35'),
 ].sort((a, b) => (a.Datetime < b.Datetime ? -1 : 1));
 
-function Dashboard(props: any) {
+function RentList(props: any) {
   const classes = useStyles();
 
   const [page, setPage] = React.useState(0);
@@ -115,7 +115,7 @@ function Dashboard(props: any) {
 
   const handleClick = (e: React.MouseEvent<unknown>, name: string) => {
     console.log(rows[name]);
-    props.history.push("/Post/" + name.toString());
+    props.history.push("/Rent/" + name.toString());
   }
   // { Merchant, Clarity, Cut, Carat, Color, Price, Certification, Datetime };
   return (
@@ -125,7 +125,6 @@ function Dashboard(props: any) {
         <Grid container={true} className={classes.container}>
           <Grid item={true} xs={12} md={12} lg={12}>
             <Paper style={{ textAlign: "right" }}>
-              <Button href="/NewPost">New Post</Button>
               <Table className={classes.table} size="small">
                 <TableHead>
                   <TableRow>
@@ -186,4 +185,4 @@ function Dashboard(props: any) {
   );
 }
 
-export default Dashboard;
+export default RentList;

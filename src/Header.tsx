@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState, KeyboardEvent } from "react";
+import { useState, useEffect, KeyboardEvent } from "react";
 
 import {
   AppBar,
@@ -21,6 +21,21 @@ function Header() {
   const classes = useStyles();
 
   const [draw, setDraw] = useState(false);
+  const [appBarScroll, setAppBarScroll] = useState(classes.appBar);
+
+  useEffect(() => {
+    window.addEventListener('scroll', ScrollHandler);
+  }, [])
+
+  function ScrollHandler(e: any) {
+    if (window.scrollY > 40) {
+      console.log("Grey", window.scrollY);
+      setAppBarScroll(classes.appBarColored);
+    } else if (window.scrollY < 40) {
+      console.log("Invisible", window.scrollY);
+      setAppBarScroll(classes.appBar);
+    }
+  }
 
   const toggleDrawer = (open: boolean) => (
     event: React.KeyboardEvent | React.MouseEvent
@@ -36,7 +51,7 @@ function Header() {
   };
 
   return (
-    <AppBar position="fixed" className={classes.appBar}>
+    <AppBar position="fixed" className={appBarScroll}>
       <Toolbar>
         <Typography variant="h6" className={classes.title} color="primary">
           DIA
@@ -58,11 +73,23 @@ function Header() {
             </ListItemIcon>
             <ListItemText>Home</ListItemText>
           </ListItem>
-          <ListItem button={true} component={Link} href="/Dashboard">
+          <ListItem button={true} component={Link} href="/SellList">
             <ListItemIcon>
               <Toc />
             </ListItemIcon>
-            <ListItemText>Dashboard</ListItemText>
+            <ListItemText>Sell List</ListItemText>
+          </ListItem>
+          <ListItem button={true} component={Link} href="/RentList">
+            <ListItemIcon>
+              <Toc />
+            </ListItemIcon>
+            <ListItemText>Rent List</ListItemText>
+          </ListItem>
+          <ListItem button={true} component={Link} href="/CertList">
+            <ListItemIcon>
+              <Toc />
+            </ListItemIcon>
+            <ListItemText>Cert List</ListItemText>
           </ListItem>
         </List>
 

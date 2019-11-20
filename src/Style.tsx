@@ -21,6 +21,9 @@ const useStyles = makeStyles((theme: Theme) =>
       background: "transparent",
       boxShadow: "none"
     },
+    appBarColored: {
+      background: "#AAAAAA"
+    },
     list: {
       width: 250,
     },
@@ -60,7 +63,8 @@ const useStyles = makeStyles((theme: Theme) =>
     grid: {
       margin: theme.spacing(0),
       padding: theme.spacing(1),
-      textAlign: "center"
+      textAlign: "center",
+      verticalAlign: "middle"
     },
     paper: {
       margin: theme.spacing(2),
