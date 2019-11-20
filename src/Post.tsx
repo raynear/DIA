@@ -18,8 +18,6 @@ function Post({ match }: any) {
   const [log, setLog] = useState();
 
   useEffect(() => {
-    // const web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545/'));
-
     setValues({ clarity: 'VVS', cut: 'Good', carat: '3/4', color: 'F', price: 4000000, id: match.params.ID, celler: 'AA 도매상', certinfo: 'BB에서 인증 되었음' });
   }, [])
 
@@ -30,6 +28,7 @@ function Post({ match }: any) {
   });
 
   function submit() {
+    console.log((window as any).web3.currentProvider.selectedAddress);
     (window as any).web3.eth.getBlockNumber((e: any, r: any) => {
       if (e) {
         //        console.log(e);

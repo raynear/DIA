@@ -62,6 +62,13 @@ const useStyles = makeStyles((theme: Theme) =>
       padding: theme.spacing(1),
       textAlign: "center"
     },
+    paper: {
+      margin: theme.spacing(2),
+      padding: theme.spacing(2),
+      display: "flex",
+      overflow: "auto",
+      flexDirection: "column"
+    },
     table: {
       minWidth: 500,
     },
@@ -84,6 +91,22 @@ const useStyles = makeStyles((theme: Theme) =>
       backgroundPosition: "center",
       textAlign: "center",
       verticalAlign: "middle"
+    },
+    parallax: {
+      height: "90vh",
+      maxHeight: "1000px",
+      overflow: "hidden",
+      position: "relative",
+      backgroundPosition: "center center",
+      backgroundSize: "cover",
+      margin: "0",
+      padding: "0",
+      border: "0",
+      display: "flex",
+      alignItems: "center"
+    },
+    small: {
+      height: "380px"
     }
   })
 );
