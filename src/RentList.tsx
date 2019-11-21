@@ -69,7 +69,7 @@ function createData(ID: number, Merchant: string, Clarity: string, Cut: string, 
 }
 
 const rows = [
-  createData(0, 'Cupcake', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10/ 18:35'),
+  createData(0, 'Cupcake', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10 18:35'),
   createData(1, 'Donut', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10 18:35'),
   createData(2, 'Eclair', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10 18:35'),
   createData(3, 'Frozen yoghurt', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10 18:35'),
@@ -123,7 +123,7 @@ function RentList(props: any) {
       <div className={classes.appBarSpacer} />
       <Container maxWidth="lg" className={classes.rootcontainer}>
         <Grid container={true} className={classes.container}>
-          <Grid item={true} xs={12} md={12} lg={12}>
+          <Grid item={true} className={classes.grid} xs={12} md={12} lg={12}>
             <Paper style={{ textAlign: "right" }}>
               <Table className={classes.table} size="small">
                 <TableHead>
@@ -154,16 +154,16 @@ function RentList(props: any) {
                     </TableRow>
                   ))}
                   {emptyRows > 0 && (
-                    <TableRow style={{ height: 53 * emptyRows }}>
-                      <TableCell colSpan={8} />
+                    <TableRow style={{ height: 33 * emptyRows }}>
+                      <TableCell colSpan={9} />
                     </TableRow>
                   )}
                 </TableBody>
                 <TableFooter>
                   <TableRow>
                     <TablePagination
-                      rowsPerPageOptions={[10, 20, { label: 'All', value: -1 }]}
-                      colSpan={8}
+                      rowsPerPageOptions={[10, 20, 30, { label: 'All', value: -1 }]}
+                      colSpan={9}
                       count={rows.length}
                       rowsPerPage={rowsPerPage}
                       page={page}

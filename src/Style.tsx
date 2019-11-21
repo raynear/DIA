@@ -8,8 +8,11 @@ const useStyles = makeStyles((theme: Theme) =>
       spacing: theme.spacing(0),
       margin: theme.spacing(0),
       padding: theme.spacing(1),
+      maxWidth: "100%",
+      width: "100%",
       display: "flex",
-      flexwrap: "wrap"
+      flexWrap: "wrap",
+      textAlign: "center"
     },
     appBarSpacer: theme.mixins.toolbar,
     content: {
@@ -58,7 +61,9 @@ const useStyles = makeStyles((theme: Theme) =>
       margin: theme.spacing(0),
       padding: theme.spacing(0),
       display: "flex",
-      flexwrap: "wrap"
+      flexWrap: "wrap",
+      textAlign: "center"
+
     },
     grid: {
       margin: theme.spacing(0),

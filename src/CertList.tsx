@@ -69,7 +69,7 @@ function createData(ID: number, Clarity: string, Cut: string, Carat: string, Col
 }
 
 const rows = [
-  createData(0, 'IF', 'Good', '3/4', 'D', 'A Certified/0xaaaa', '2019/09/10/ 18:35'),
+  createData(0, 'IF', 'Good', '3/4', 'D', 'A Certified/0xaaaa', '2019/09/10 18:35'),
   createData(1, 'IF', 'Good', '3/4', 'D', 'A Certified/0xaaaa', '2019/09/10 18:35'),
   createData(2, 'IF', 'Good', '3/4', 'D', 'A Certified/0xaaaa', '2019/09/10 18:35'),
   createData(3, 'IF', 'Good', '3/4', 'D', 'A Certified/0xaaaa', '2019/09/10 18:35'),
@@ -123,7 +123,7 @@ function CertList(props: any) {
       <div className={classes.appBarSpacer} />
       <Container maxWidth="lg" className={classes.rootcontainer}>
         <Grid container={true} className={classes.container}>
-          <Grid item={true} xs={12} md={12} lg={12}>
+          <Grid item={true} className={classes.grid} xs={12} md={12} lg={12}>
             <Paper style={{ textAlign: "right" }}>
               <Button href="/NewCert">New Cert</Button>
               <Table className={classes.table} size="small">
@@ -151,16 +151,16 @@ function CertList(props: any) {
                     </TableRow>
                   ))}
                   {emptyRows > 0 && (
-                    <TableRow style={{ height: 53 * emptyRows }}>
-                      <TableCell colSpan={8} />
+                    <TableRow style={{ height: 33 * emptyRows }}>
+                      <TableCell colSpan={7} />
                     </TableRow>
                   )}
                 </TableBody>
                 <TableFooter>
                   <TableRow>
                     <TablePagination
-                      rowsPerPageOptions={[10, 20, { label: 'All', value: -1 }]}
-                      colSpan={8}
+                      rowsPerPageOptions={[10, 20, 30, { label: 'All', value: -1 }]}
+                      colSpan={7}
                       count={rows.length}
                       rowsPerPage={rowsPerPage}
                       page={page}
