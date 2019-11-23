@@ -7,6 +7,8 @@ import useStyles from "./Style";
 
 import Web3 from "web3";
 
+import { contractAddress, abi } from "./SmartContract";
+
 function NewCert() {
   const classes = useStyles();
 
@@ -41,6 +43,13 @@ function NewCert() {
         return r;
       }
     });
+    console.log((window as any).web3.eth.accounts);
+    const mycontract = (window as any).web3.eth.contract(abi);
+    const contract = mycontract.at(contractAddress);
+
+    (window as any).web3.eth.defaultAccount = (window as any).web3.eth.accounts[0]
+    contract.register(fourC.cut, fourC.color, fourC.clarity, fourC.carat, 0, (e: any, r: any) => { console.log(r) });
+    //    contract.methods.register(fourC.cut, fourC.color, fourC.clarity, fourC.carat, 0, (e: any, r: any) => { console.log(r) })
   }
 
   return (
@@ -51,7 +60,7 @@ function NewCert() {
           <Grid item={true} xs={12} md={12} lg={12}>
             <Paper style={{ textAlign: "right" }}>
               <Grid container={true} className={classes.container}>
-                <Grid item={true} className={classes.grid} xs={12} md={6} lg={6}>
+                <Grid item={true} className={classes.grid} xs={12} md={12} lg={12}>
                   <TextField
                     required={true}
                     id="Certification"
@@ -62,7 +71,7 @@ function NewCert() {
                     onChange={handleChange}
                   />
                 </Grid>
-                <Grid item={true} className={classes.grid} xs={6} md={3} lg={3}>
+                <Grid item={true} className={classes.grid} xs={6} md={6} lg={6}>
                   <FormControl variant="outlined" className={classes.formControl}>
                     <InputLabel ref={inputLabel}>
                       Carat
@@ -92,7 +101,7 @@ function NewCert() {
                     </Select>
                   </FormControl>
                 </Grid>
-                <Grid item={true} className={classes.grid} xs={6} md={3} lg={3}>
+                <Grid item={true} className={classes.grid} xs={6} md={6} lg={6}>
                   <FormControl variant="outlined" className={classes.formControl}>
                     <InputLabel ref={inputLabel}>
                       Clarity
@@ -120,7 +129,7 @@ function NewCert() {
                     </Select>
                   </FormControl>
                 </Grid>
-                <Grid item={true} className={classes.grid} xs={6} md={3} lg={3}>
+                <Grid item={true} className={classes.grid} xs={6} md={6} lg={6}>
                   <FormControl variant="outlined" className={classes.formControl}>
                     <InputLabel ref={inputLabel}>
                       Cut
@@ -142,7 +151,7 @@ function NewCert() {
                     </Select>
                   </FormControl>
                 </Grid>
-                <Grid item={true} className={classes.grid} xs={6} md={3} lg={3}>
+                <Grid item={true} className={classes.grid} xs={6} md={6} lg={6}>
                   <FormControl variant="outlined" className={classes.formControl}>
                     <InputLabel ref={inputLabel}>
                       Color

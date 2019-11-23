@@ -1,11 +1,10 @@
 import * as React from 'react';
 
-import { useTheme, Typography, Container, Paper, Grid, Table, TableHead, TableBody, TableCell, TableFooter, TablePagination, TableRow, IconButton } from "@material-ui/core";
+import { useTheme } from '@material-ui/core';
+import { Typography, Container, Paper, Grid, Table, TableHead, TableBody, TableCell, TableFooter, TablePagination, TableRow, IconButton } from "@material-ui/core";
 import { FirstPage, KeyboardArrowLeft, KeyboardArrowRight, LastPage } from '@material-ui/icons';
 
 import useStyles from "./Style";
-
-import Img4 from "./dia4.jpg";
 
 interface ITablePaginationActionsProps {
   count: number;
@@ -65,37 +64,37 @@ function TablePaginationActions(props: ITablePaginationActionsProps) {
   );
 }
 
-function createData(ID: number, Merchant: string, Clarity: string, Cut: string, Carat: string, Color: string, Price: number, Certification: string, Datetime: string) {
-  return { ID, Merchant, Clarity, Cut, Carat, Color, Price, Certification, Datetime };
+function createData(ID: number, Clarity: string, Cut: string, Carat: string, Color: string, Certification: string, Datetime: string) {
+  return { ID, Clarity, Cut, Carat, Color, Certification, Datetime };
 }
 
 const rows = [
-  createData(0, 'Cupcake', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10 18:35'),
-  createData(1, 'Donut', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10 18:35'),
-  createData(2, 'Eclair', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10 18:35'),
-  createData(3, 'Frozen yoghurt', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10 18:35'),
-  createData(4, 'Gingerbread', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10 18:35'),
-  createData(5, 'Honeycomb', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10 18:35'),
-  createData(6, 'Ice cream sandwich', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10 18:35'),
-  createData(7, 'Jelly Bean', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10 18:35'),
-  createData(8, 'KitKat', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10 18:35'),
-  createData(9, 'Jelly Bean', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10 18:35'),
-  createData(10, 'KitKat', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10 18:35'),
-  createData(11, 'Jelly Bean', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10 18:35'),
-  createData(12, 'KitKat', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10 18:35'),
-  createData(13, 'Jelly Bean', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10 18:35'),
-  createData(14, 'KitKat', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10 18:35'),
-  createData(15, 'Lollipop', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10 18:35'),
-  createData(16, 'Marshmallow', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10 18:35'),
-  createData(17, 'Jelly Bean', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10 18:35'),
-  createData(18, 'KitKat', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10 18:35'),
-  createData(19, 'Jelly Bean', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10 18:35'),
-  createData(20, 'KitKat', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10 18:35'),
-  createData(21, 'Nougat', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10 18:35'),
-  createData(22, 'Oreo', 'IF', 'Good', '3/4', 'D', 4000000, 'A Certified/0xaaaa', '2019/09/10 18:35'),
+  createData(0, 'IF', 'Good', '3/4', 'D', 'A Certified/0xaaaa', '2019/09/10 18:35'),
+  createData(1, 'IF', 'Good', '3/4', 'D', 'A Certified/0xaaaa', '2019/09/10 18:35'),
+  createData(2, 'IF', 'Good', '3/4', 'D', 'A Certified/0xaaaa', '2019/09/10 18:35'),
+  createData(3, 'IF', 'Good', '3/4', 'D', 'A Certified/0xaaaa', '2019/09/10 18:35'),
+  createData(4, 'IF', 'Good', '3/4', 'D', 'A Certified/0xaaaa', '2019/09/10 18:35'),
+  createData(5, 'IF', 'Good', '3/4', 'D', 'A Certified/0xaaaa', '2019/09/10 18:35'),
+  createData(6, 'IF', 'Good', '3/4', 'D', 'A Certified/0xaaaa', '2019/09/10 18:35'),
+  createData(7, 'IF', 'Good', '3/4', 'D', 'A Certified/0xaaaa', '2019/09/10 18:35'),
+  createData(8, 'IF', 'Good', '3/4', 'D', 'A Certified/0xaaaa', '2019/09/10 18:35'),
+  createData(9, 'IF', 'Good', '3/4', 'D', 'A Certified/0xaaaa', '2019/09/10 18:35'),
+  createData(10, 'IF', 'Good', '3/4', 'D', 'A Certified/0xaaaa', '2019/09/10 18:35'),
+  createData(11, 'IF', 'Good', '3/4', 'D', 'A Certified/0xaaaa', '2019/09/10 18:35'),
+  createData(12, 'IF', 'Good', '3/4', 'D', 'A Certified/0xaaaa', '2019/09/10 18:35'),
+  createData(13, 'IF', 'Good', '3/4', 'D', 'A Certified/0xaaaa', '2019/09/10 18:35'),
+  createData(14, 'IF', 'Good', '3/4', 'D', 'A Certified/0xaaaa', '2019/09/10 18:35'),
+  createData(15, 'IF', 'Good', '3/4', 'D', 'A Certified/0xaaaa', '2019/09/10 18:35'),
+  createData(16, 'IF', 'Good', '3/4', 'D', 'A Certified/0xaaaa', '2019/09/10 18:35'),
+  createData(17, 'IF', 'Good', '3/4', 'D', 'A Certified/0xaaaa', '2019/09/10 18:35'),
+  createData(18, 'IF', 'Good', '3/4', 'D', 'A Certified/0xaaaa', '2019/09/10 18:35'),
+  createData(19, 'IF', 'Good', '3/4', 'D', 'A Certified/0xaaaa', '2019/09/10 18:35'),
+  createData(20, 'IF', 'Good', '3/4', 'D', 'A Certified/0xaaaa', '2019/09/10 18:35'),
+  createData(21, 'IF', 'Good', '3/4', 'D', 'A Certified/0xaaaa', '2019/09/10 18:35'),
+  createData(22, 'IF', 'Good', '3/4', 'D', 'A Certified/0xaaaa', '2019/09/10 18:35'),
 ].sort((a, b) => (a.Datetime < b.Datetime ? -1 : 1));
 
-function SellList(props: any) {
+function MyDiamondList(props: any) {
   const classes = useStyles();
 
   const [page, setPage] = React.useState(0);
@@ -116,7 +115,7 @@ function SellList(props: any) {
 
   const handleClick = (e: React.MouseEvent<unknown>, name: string) => {
     console.log(rows[name]);
-    props.history.push("/Sell/" + name.toString());
+    props.history.push("/Cert/" + name.toString());
   }
   // { Merchant, Clarity, Cut, Carat, Color, Price, Certification, Datetime };
   return (
@@ -125,20 +124,18 @@ function SellList(props: any) {
       <Container maxWidth="lg" className={classes.rootcontainer}>
         <Grid container={true} className={classes.container}>
           <Grid item={true} className={classes.grid} xs={12} md={12} lg={12}>
-            <div style={{ backgroundImage: `url(${Img4})`, backgroundPosition: "center", backgroundSize: "cover", backgroundRepeat: "no-repeat", width: "100%", height: "200px"  }}>
-              <Typography variant="subtitle1" color="textSecondary">Sell List</Typography>
+            <div className={classes.listImg}>
+              <Typography variant="h2" color="textSecondary" className={classes.listText}>My Diamond List</Typography>
             </div>
-            <Paper style={{ textAlign: "right" }}>
+            <Paper>
               <Table className={classes.table} size="small">
                 <TableHead>
                   <TableRow>
                     <TableCell className={classes.tablehead}>ID</TableCell>
-                    <TableCell className={classes.tablehead}>Merchant</TableCell>
                     <TableCell className={classes.tablehead} align="center">Clarity</TableCell>
                     <TableCell className={classes.tablehead} align="center">Cut</TableCell>
                     <TableCell className={classes.tablehead} align="center">Carat</TableCell>
                     <TableCell className={classes.tablehead} align="center">Color</TableCell>
-                    <TableCell className={classes.tablehead} align="center">Price</TableCell>
                     <TableCell className={classes.tablehead} align="center">Certification</TableCell>
                     <TableCell className={classes.tablehead} align="center">Datetime</TableCell>
                   </TableRow>
@@ -147,19 +144,17 @@ function SellList(props: any) {
                   {(rowsPerPage > 0 ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage) : rows).map((row: any) => (
                     <TableRow key={row.ID} hover={true} onClick={(e) => handleClick(e, row.ID)}>
                       <TableCell align="center">{row.ID}</TableCell>
-                      <TableCell>{row.Merchant}</TableCell>
                       <TableCell align="center">{row.Clarity}</TableCell>
                       <TableCell align="center">{row.Cut}</TableCell>
                       <TableCell align="center">{row.Carat}</TableCell>
                       <TableCell align="center">{row.Color}</TableCell>
-                      <TableCell align="right">{row.Price}</TableCell>
                       <TableCell align="right">{row.Certification}</TableCell>
                       <TableCell align="right">{row.Datetime}</TableCell>
                     </TableRow>
                   ))}
                   {emptyRows > 0 && (
                     <TableRow style={{ height: 33 * emptyRows }}>
-                      <TableCell colSpan={9} />
+                      <TableCell colSpan={7} />
                     </TableRow>
                   )}
                 </TableBody>
@@ -167,7 +162,7 @@ function SellList(props: any) {
                   <TableRow>
                     <TablePagination
                       rowsPerPageOptions={[10, 20, 30, { label: 'All', value: -1 }]}
-                      colSpan={9}
+                      colSpan={7}
                       count={rows.length}
                       rowsPerPage={rowsPerPage}
                       page={page}
@@ -185,8 +180,9 @@ function SellList(props: any) {
             </Paper>
           </Grid>
         </Grid>
-      </Container>    </>
+      </Container>
+    </>
   );
 }
 
-export default SellList;
+export default MyDiamondList;

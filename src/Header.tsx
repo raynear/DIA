@@ -21,8 +21,23 @@ function Header() {
   const classes = useStyles();
 
   const [draw, setDraw] = useState(false);
-  const [appBarScroll, setAppBarScroll] = useState(classes.appBar);
-
+  //  const [appBarScroll, setAppBarScroll] = useState(classes.appBar);
+  const [appBarFlag, setAppBarFlag] = useState(true);
+  /*
+    useEffect(() => {
+      window.addEventListener('scroll', ScrollHandler);
+    }, [])
+  
+    function ScrollHandler(e: any) {
+      if (window.scrollY > 40 && appBarScroll !== classes.appBarColored) {
+        console.log("Grey", window.scrollY);
+        setAppBarScroll(classes.appBarColored);
+      } else if (window.scrollY < 40 && appBarScroll !== classes.appBar) {
+        console.log("Invisible", window.scrollY);
+        setAppBarScroll(classes.appBar);
+      }
+    }
+  */
   useEffect(() => {
     window.addEventListener('scroll', ScrollHandler);
   }, [])
@@ -30,10 +45,12 @@ function Header() {
   function ScrollHandler(e: any) {
     if (window.scrollY > 40) {
       console.log("Grey", window.scrollY);
-      setAppBarScroll(classes.appBarColored);
+      setAppBarFlag(false);
+      //        setAppBarScroll(classes.appBarColored);
     } else if (window.scrollY < 40) {
       console.log("Invisible", window.scrollY);
-      setAppBarScroll(classes.appBar);
+      setAppBarFlag(true);
+      //        setAppBarScroll(classes.appBar);
     }
   }
 
@@ -50,11 +67,20 @@ function Header() {
     setDraw(open);
   };
 
+  let appBarScroll;
+  if (appBarFlag) {
+    appBarScroll = classes.appBar;
+  } else {
+    appBarScroll = classes.appBarColored;
+  }
+  //  let appBarScroll = (appBarFlag === true && classes.appBar) || (appBarFlag === false && classes.appBarColored);
   return (
     <AppBar position="fixed" className={appBarScroll}>
       <Toolbar>
         <Typography variant="h6" className={classes.title} color="primary">
-          DIA
+          <Link href="/">
+            Wiggler
+          </Link>
         </Typography>
         <IconButton
           edge="end"
@@ -67,29 +93,41 @@ function Header() {
       </Toolbar>
       <Drawer anchor="right" open={draw} onClose={toggleDrawer(false)}>
         <List>
-          <ListItem button={true} component={Link} href="/">
+          <ListItem button={true} component={Link} href="/DIA/">
             <ListItemIcon>
               <Home />
             </ListItemIcon>
             <ListItemText>Home</ListItemText>
           </ListItem>
-          <ListItem button={true} component={Link} href="/SellList">
+          <ListItem button={true} component={Link} href="/DIA/DiamondList">
             <ListItemIcon>
               <Toc />
             </ListItemIcon>
-            <ListItemText>Sell List</ListItemText>
+            <ListItemText>Diamonds</ListItemText>
           </ListItem>
-          <ListItem button={true} component={Link} href="/RentList">
+          <ListItem button={true} component={Link} href="/DIA/RentList">
             <ListItemIcon>
               <Toc />
             </ListItemIcon>
-            <ListItemText>Rent List</ListItemText>
+            <ListItemText>Rent Diamonds</ListItemText>
           </ListItem>
-          <ListItem button={true} component={Link} href="/CertList">
+          <ListItem button={true} component={Link} href="/DIA/MyDiamondList">
             <ListItemIcon>
               <Toc />
             </ListItemIcon>
-            <ListItemText>Cert List</ListItemText>
+            <ListItemText>My Diamonds</ListItemText>
+          </ListItem>
+          <ListItem button={true} component={Link} href="/DIA/NewDiamond">
+            <ListItemIcon>
+              <Toc />
+            </ListItemIcon>
+            <ListItemText>Register New Diamond</ListItemText>
+          </ListItem>
+          <ListItem button={true} component={Link} href="/DIA/Investor">
+            <ListItemIcon>
+              <Toc />
+            </ListItemIcon>
+            <ListItemText>투자 내역</ListItemText>
           </ListItem>
         </List>
 

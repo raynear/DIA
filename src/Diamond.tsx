@@ -10,7 +10,7 @@ import useStyles from "./Style";
 
 // interface FourC { clarity: '', cut: '', carat: '', color: '' }
 
-function Rent({ match }: any) {
+function Diamond({ match }: any) {
   const classes = useStyles();
   //  const id = match.params.id;
 
@@ -37,6 +37,10 @@ function Rent({ match }: any) {
         return r;
       }
     });
+  }
+
+  function pushCookie() {
+    document.cookie = "MyDiaList=[1,3,5,8,10]"
   }
 
   return (
@@ -79,11 +83,24 @@ function Rent({ match }: any) {
                     Color: {values.color}
                   </Typography>
                 </Grid>
+                <Grid item={true} className={classes.grid} xs={12} md={12} lg={12}>
+                  <Button fullWidth={true} variant="contained" color="primary" onClick={submit}>살께요!</Button>
+                </Grid>
+                <Grid item={true} className={classes.grid} xs={12} md={12} lg={12}>
+                  <Button fullWidth={true} variant="contained" color="primary" onClick={submit}>판매 리스트에 올리기!</Button>
+                </Grid>
                 <Grid item={true} className={classes.grid} xs={6} md={6} lg={6}>
                   <Button fullWidth={true} variant="contained" color="primary" onClick={submit}>환불!</Button>
                 </Grid>
                 <Grid item={true} className={classes.grid} xs={6} md={6} lg={6}>
                   <Button fullWidth={true} variant="contained" color="primary" onClick={submit}>판매완료(송금)!</Button>
+                </Grid>
+                <br />
+                <br />
+                <br />
+                <br />
+                <Grid item={true} className={classes.grid} xs={12} md={12} lg={12}>
+                  <Button fullWidth={true} variant="contained" color="primary" onClick={pushCookie}>Set Cookie</Button>
                 </Grid>
               </Grid>
             </Paper>
@@ -94,4 +111,4 @@ function Rent({ match }: any) {
   );
 }
 
-export default Rent;
+export default Diamond;

@@ -1,5 +1,6 @@
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import DiaMain from "./dia_main.jpg";
+import Img4 from "./dia4.jpg";
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -25,7 +26,7 @@ const useStyles = makeStyles((theme: Theme) =>
       boxShadow: "none"
     },
     appBarColored: {
-      background: "#AAAAAA"
+      background: "#dddddd"
     },
     list: {
       width: 250,
@@ -54,6 +55,22 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     menuButton: {
       marginRight: theme.spacing(2)
+    },
+    listImg: {
+      margin: theme.spacing(1),
+      borderRadius: "10px",
+      backgroundImage: `url(${Img4})`,
+      backgroundPosition: "center",
+      backgroundSize: "cover",
+      backgroundRepeat: "no-repeat",
+      width: "calc(100%-16px)",
+      height: "150px",
+      display: "flex",
+      alignItems: "center"
+    },
+    listText: {
+      color: "#FFFFFF",
+      textShadow: "2px 2px 1px #000000"
     },
     container: {
       width: "100%",
@@ -91,15 +108,19 @@ const useStyles = makeStyles((theme: Theme) =>
       flexGrow: 1
     },
     mainCopy: {
-      color: "#ffffff"
+      color: "#ffffff",
+      textShadow: "-1px -1px 0 #888, 1px -1px 0 #888,-1px 1px 0 #888, 1px 1px 0 #888"
     },
-    landingImg: {
-      height: 500,
+    mainImg: {
       backgroundImage: `url(${DiaMain})`,
-      backgroundRepeat: "no-repeat",
       backgroundPosition: "center",
+      backgroundSize: "cover",
+      backgroundRepeat: "no-repeat",
+      width: "100%",
+      height: "500px",
       textAlign: "center",
-      verticalAlign: "middle"
+      verticalAlign: "middle",
+      alignItems: "center"
     },
     parallax: {
       height: "90vh",

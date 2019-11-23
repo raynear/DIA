@@ -4,8 +4,6 @@ import { ParallaxProvider, Parallax } from "react-scroll-parallax";
 // import LandingImage from './LandingImage';
 import LandingContents from './LandingContents';
 
-import MainImg from "./dia_main.jpg";
-
 import useStyles from "./Style";
 
 function LandingPage() {
@@ -14,10 +12,25 @@ function LandingPage() {
 
     <>
       <ParallaxProvider>
-        <div style={{ backgroundImage: `url(${MainImg})`, backgroundPosition: "center", backgroundSize: "cover", backgroundRepeat: "no-repeat", width: "100%", height: "500px" }}>
-          <Typography>TEST!!</Typography>
+        <div className={classes.mainImg}>
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <Typography variant="h4" className={classes.mainCopy}>Diamond is forever</Typography>
         </div>
-        <Parallax y={[10, -30]}>
+        <Parallax y={[5, -30]}>
           <Paper className={classes.paper}>
             <LandingContents />
           </Paper>

@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { useTheme } from '@material-ui/core';
-import { Container, Paper, Grid, Table, TableHead, TableBody, TableCell, TableFooter, TablePagination, TableRow, IconButton } from "@material-ui/core";
+import { Typography, Container, Paper, Grid, Table, TableHead, TableBody, TableCell, TableFooter, TablePagination, TableRow, IconButton } from "@material-ui/core";
 import { FirstPage, KeyboardArrowLeft, KeyboardArrowRight, LastPage } from '@material-ui/icons';
 
 import useStyles from "./Style";
@@ -124,12 +124,15 @@ function RentList(props: any) {
       <Container maxWidth="lg" className={classes.rootcontainer}>
         <Grid container={true} className={classes.container}>
           <Grid item={true} className={classes.grid} xs={12} md={12} lg={12}>
+            <div className={classes.listImg}>
+              <Typography variant="h2" color="textSecondary" className={classes.listText}>{"  "}Rent List</Typography>
+            </div>
+
             <Paper style={{ textAlign: "right" }}>
               <Table className={classes.table} size="small">
                 <TableHead>
                   <TableRow>
                     <TableCell className={classes.tablehead}>ID</TableCell>
-                    <TableCell className={classes.tablehead}>Merchant</TableCell>
                     <TableCell className={classes.tablehead} align="center">Clarity</TableCell>
                     <TableCell className={classes.tablehead} align="center">Cut</TableCell>
                     <TableCell className={classes.tablehead} align="center">Carat</TableCell>
@@ -143,7 +146,6 @@ function RentList(props: any) {
                   {(rowsPerPage > 0 ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage) : rows).map((row: any) => (
                     <TableRow key={row.ID} hover={true} onClick={(e) => handleClick(e, row.ID)}>
                       <TableCell align="center">{row.ID}</TableCell>
-                      <TableCell>{row.Merchant}</TableCell>
                       <TableCell align="center">{row.Clarity}</TableCell>
                       <TableCell align="center">{row.Cut}</TableCell>
                       <TableCell align="center">{row.Carat}</TableCell>
@@ -155,7 +157,7 @@ function RentList(props: any) {
                   ))}
                   {emptyRows > 0 && (
                     <TableRow style={{ height: 33 * emptyRows }}>
-                      <TableCell colSpan={9} />
+                      <TableCell colSpan={8} />
                     </TableRow>
                   )}
                 </TableBody>
@@ -163,7 +165,7 @@ function RentList(props: any) {
                   <TableRow>
                     <TablePagination
                       rowsPerPageOptions={[10, 20, 30, { label: 'All', value: -1 }]}
-                      colSpan={9}
+                      colSpan={8}
                       count={rows.length}
                       rowsPerPage={rowsPerPage}
                       page={page}

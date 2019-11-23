@@ -3,13 +3,12 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import Header from './Header';
 import LandingPage from './LandingPage';
-import Cert from './Cert';
-import NewCert from './NewCert';
-import CertList from './CertList';
-import Rent from './Rent';
+import NewDiamond from './NewDiamond';
+import MyDiamondList from './MyDiamondList';
 import RentList from './RentList';
-import SellList from './SellList';
-import Sell from './Sell';
+import DiamondList from './DiamondList';
+import Diamond from './Diamond';
+import Investor from './Investor';
 import Copyright from './Copyright';
 
 function App() {
@@ -18,14 +17,13 @@ function App() {
       <Header />
       <Router>
         <Switch>
-          <Route exact={true} path="/" component={LandingPage} />
-          <Route exact={true} path="/Cert/:ID" component={Cert} />
-          <Route exact={true} path="/CertList" component={CertList} />
-          <Route exact={true} path="/NewCert" component={NewCert} />
-          <Route exact={true} path="/Rent/:ID" component={Rent} />
-          <Route exact={true} path="/RentList" component={RentList} />
-          <Route exact={true} path="/SellList" component={SellList} />
-          <Route exact={true} path="/Sell/:ID" component={Sell} />
+          <Route exact={true} path="/DIA/" component={LandingPage} />
+          <Route exact={true} path="/DIA/MyDiamondList" component={MyDiamondList} />
+          <Route exact={true} path="/DIA/NewDiamond" component={NewDiamond} />
+          <Route exact={true} path="/DIA/RentList" component={RentList} />
+          <Route exact={true} path="/DIA/DiamondList" component={DiamondList} />
+          <Route exact={true} path="/DIA/Diamond/:ID" component={Diamond} />
+          <Route exact={true} path="/DIA/Investor" component={Investor} />
         </Switch>
       </Router>
       <Copyright />
