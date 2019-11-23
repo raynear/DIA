@@ -78,7 +78,7 @@ function Header() {
     <AppBar position="fixed" className={appBarScroll}>
       <Toolbar>
         <Typography variant="h6" className={classes.title} color="primary">
-          <Link href="/">
+          <Link href="/DIA/">
             Wiggler
           </Link>
         </Typography>

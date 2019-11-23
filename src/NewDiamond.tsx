@@ -9,7 +9,7 @@ import Web3 from "web3";
 
 import { contractAddress, abi } from "./SmartContract";
 
-function NewCert() {
+function NewDiamond() {
   const classes = useStyles();
 
   const inputLabel = React.useRef<HTMLLabelElement>(null);
@@ -203,4 +203,4 @@ function NewCert() {
   );
 }
 
-export default NewCert;
+export default NewDiamond;
