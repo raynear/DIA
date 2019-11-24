@@ -9,6 +9,7 @@ import RentList from './RentList';
 import DiamondList from './DiamondList';
 import Diamond from './Diamond';
 import Investor from './Investor';
+import Config from './Config';
 import Copyright from './Copyright';
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
           <Route exact={true} path="/DIA/DiamondList" component={DiamondList} />
           <Route exact={true} path="/DIA/Diamond/:ID" component={Diamond} />
           <Route exact={true} path="/DIA/Investor" component={Investor} />
+          <Route exact={true} path="/DIA/Config" component={Config} />
         </Switch>
       </Router>
       <Copyright />
