@@ -120,7 +120,6 @@ function MyDiamondList(props: any) {
   // { Merchant, Clarity, Cut, Carat, Color, Price, Certification, Datetime };
   return (
     <>
-      <div className={classes.appBarSpacer} />
       <Container maxWidth="lg" className={classes.rootcontainer}>
         <Grid container={true} className={classes.container}>
           <Grid item={true} className={classes.grid} xs={12} md={12} lg={12}>

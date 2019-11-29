@@ -16,20 +16,6 @@ function Config({ match }: any) {
     }
   });
 
-  /*  
-    function submit() {
-      console.log((window as any).web3.currentProvider.selectedAddress);
-      (window as any).web3.eth.getBlockNumber((e: any, r: any) => {
-        if (e) {
-          console.log(e);
-          return e;
-        } else {
-          console.log(r);
-          return r;
-        }
-      });
-    }
-  */
   function wholeSaleCookie() {
     document.cookie = "MyDiaList=[1,3,5,8,10]"
   }
@@ -40,7 +26,6 @@ function Config({ match }: any) {
 
   return (
     <>
-      <div className={classes.appBarSpacer} />
       <Container maxWidth="lg" className={classes.rootcontainer}>
         <Grid container={true} className={classes.container}>
           <Grid item={true} xs={12} md={12} lg={12}>

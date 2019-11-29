@@ -27,28 +27,30 @@ function Diamond({ match }: any) {
       setValues({ clarity: r[1], cut: r[2], carat: r[3], color: r[4], price: r[5], id: r[0], certinfo: r[6] })
     })
 
-    const myAddress = web3.givenProvider.selectedAddress;
     const roleContract = new web3.eth.Contract(playerRoleABI as any, playerRoleContractAddress);
 
-    web3.eth.defaultAccount = myAddress;
-    roleContract.methods.checkPlayerRole(myAddress).call().then((r: any) => {
-      console.log(r);
-      const r1 = parseInt(r[0], 10);
-      const r2 = parseInt(r[1], 10);
-      const r3 = parseInt(r[2], 10);
+    web3.eth.getAccounts().then((account: any) => {
+      const myAddress = account[0];
+      web3.eth.defaultAccount = myAddress;
+      roleContract.methods.checkPlayerRole(myAddress).call().then((r: any) => {
+        console.log(r);
+        const r1 = parseInt(r[0], 10);
+        const r2 = parseInt(r[1], 10);
+        const r3 = parseInt(r[2], 10);
 
-      if (r1 === 1 || r2 === 1 || r3 === 1) {
-        setRole(1);
-      } else if (r1 === 2 || r2 === 2 || r3 === 2) {
-        setRole(2);
-      } else if (r1 === 3 || r2 === 3 || r3 === 3) {
-        setRole(3);
-      }
-    })
+        if (r1 === 1 || r2 === 1 || r3 === 1) {
+          setRole(1);
+        } else if (r1 === 2 || r2 === 2 || r3 === 2) {
+          setRole(2);
+        } else if (r1 === 3 || r2 === 3 || r3 === 3) {
+          setRole(3);
+        }
+      })
 
-    setInMyList(inMyCookieList(parseInt(match.params.ID, 10)));
+      setInMyList(inMyCookieList(parseInt(match.params.ID, 10)));
 
-    setValues({ clarity: 'VVS', cut: 'Good', carat: '3/4', color: 'F', price: 4000000, id: match.params.ID, certinfo: 'BB에서 인증 되었음' });
+      setValues({ clarity: 'VVS', cut: 'Good', carat: '3/4', color: 'F', price: 4000000, id: match.params.ID, certinfo: 'BB에서 인증 되었음' });
+    });
   }, [])
 
   window.addEventListener('load', async () => {
@@ -85,7 +87,6 @@ function Diamond({ match }: any) {
 
   return (
     <>
-      <div className={classes.appBarSpacer} />
       <Container maxWidth="lg" className={classes.rootcontainer}>
         <Grid container={true} className={classes.container}>
           <Grid item={true} xs={12} md={12} lg={12}>

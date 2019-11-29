@@ -58,7 +58,6 @@ function NewDiamond() {
 
   return (
     <>
-      <div className={classes.appBarSpacer} />
       <Container maxWidth="lg" className={classes.rootcontainer}>
         <Grid container={true} className={classes.container}>
           <Grid item={true} xs={12} md={12} lg={12}>

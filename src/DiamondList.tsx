@@ -105,7 +105,7 @@ function DiamondList(props: any) {
 
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
-  const [filter, setFilter] = useState({ type: "all", OffSale: false, OnSale: false, Rented: false, Sold: false })
+  const [filter, setFilter] = useState({ type: "All", OffSale: false, OnSale: false, Rented: false, Sold: false })
   const [displayRows, setDisplayRows] = useState<IDiamond[]>([]);
 
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, displayRows.length - page * rowsPerPage);
@@ -147,12 +147,12 @@ function DiamondList(props: any) {
   }
 
   function filterList(listType: string) {
-    if (listType === "all") {
-      console.log("all");
+    if (listType === "All") {
+      console.log("All");
       setFilter({ ...filter, type: listType })
     }
-    else if (listType === "my") {
-      console.log("my");
+    else if (listType === "My") {
+      console.log("My");
       setFilter({ ...filter, type: listType })
     }
   }
@@ -161,7 +161,26 @@ function DiamondList(props: any) {
     setFilter({ ...filter, [status]: !filter[status] })
   }
 
+
+  function inMyCookieList(id: number) {
+    const Cookies = document.cookie.split(";");
+    for (const i in Cookies) {
+      if (Cookies[i].split("=")[0].trim() === "MyDiaList") {
+        const DiaList = JSON.parse(Cookies[i].split("=")[1]);
+        console.log("dialist", DiaList);
+        if (DiaList.includes(id)) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
   function filtering(obj: any) {
+    console.log(obj);
+    if (filter.type === "My" && !inMyCookieList(parseInt(obj.ID, 10))) {
+      return false;
+    }
     if (filter.OffSale && parseInt(obj.Status, 10) === DiaStatus.OffSale) {
       return true;
     } else if (filter.OnSale && parseInt(obj.Status, 10) === DiaStatus.OnSale) {
@@ -176,7 +195,6 @@ function DiamondList(props: any) {
 
   return (
     <>
-      <div className={classes.appBarSpacer} />
       <Container maxWidth="lg" className={classes.rootcontainer}>
         <Grid container={true} className={classes.container}>
           <Grid item={true} className={classes.grid} xs={12} md={12} lg={12}>
@@ -185,8 +203,8 @@ function DiamondList(props: any) {
             </div>
             <Paper style={{ textAlign: "right" }}>
               <ButtonGroup>
-                <Button color="primary" disabled={filter.type === "all"} onClick={() => filterList("all")}>All</Button>
-                <Button color="primary" disabled={filter.type === "my"} onClick={() => filterList("my")}>My</Button>
+                <Button color="primary" disabled={filter.type === "All"} onClick={() => filterList("All")}>All</Button>
+                <Button color="primary" disabled={filter.type === "My"} onClick={() => filterList("My")}>My</Button>
               </ButtonGroup>
               <FormControlLabel
                 control={<Checkbox checked={filter.OffSale} onChange={() => handleChange('OffSale')} value="OffSale" />}

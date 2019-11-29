@@ -15,7 +15,6 @@ const useStyles = makeStyles((theme: Theme) =>
       flexWrap: "wrap",
       textAlign: "center"
     },
-    appBarSpacer: theme.mixins.toolbar,
     content: {
       flexGrow: 1,
       height: "100vh",
@@ -106,6 +105,14 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     title: {
       flexGrow: 1
+    },
+    toolbar: {
+      justifyContent: 'space-between',
+      overflowX: 'auto',
+    },
+    toolbarLink: {
+      padding: theme.spacing(1),
+      flexShrink: 0,
     },
     mainCopy: {
       color: "#ffffff",
