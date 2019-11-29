@@ -138,21 +138,17 @@ function DiamondList(props: any) {
   ) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
-    console.log(displayRows);
   };
 
   const handleClick = (e: React.MouseEvent<unknown>, name: string) => {
-    console.log(displayRows[name]);
     props.history.push("/DIA/Diamond/" + name.toString());
   }
 
   function filterList(listType: string) {
     if (listType === "All") {
-      console.log("All");
       setFilter({ ...filter, type: listType })
     }
     else if (listType === "My") {
-      console.log("My");
       setFilter({ ...filter, type: listType })
     }
   }
@@ -167,7 +163,6 @@ function DiamondList(props: any) {
     for (const i in Cookies) {
       if (Cookies[i].split("=")[0].trim() === "MyDiaList") {
         const DiaList = JSON.parse(Cookies[i].split("=")[1]);
-        console.log("dialist", DiaList);
         if (DiaList.includes(id)) {
           return true;
         }
@@ -177,7 +172,6 @@ function DiamondList(props: any) {
   }
 
   function filtering(obj: any) {
-    console.log(obj);
     if (filter.type === "My" && !inMyCookieList(parseInt(obj.ID, 10))) {
       return false;
     }

@@ -60,26 +60,20 @@ function Investor({ match }: any) {
   });
 
   function changeLimit() {
-    console.log((window as any).web3.currentProvider.selectedAddress);
     (window as any).web3.eth.getBlockNumber((e: any, r: any) => {
       if (e) {
-        console.log(e);
         return e;
       } else {
-        console.log(r);
         return r;
       }
     });
   }
 
   function changeState() {
-    console.log((window as any).web3.currentProvider.selectedAddress);
     (window as any).web3.eth.getBlockNumber((e: any, r: any) => {
       if (e) {
-        console.log(e);
         return e;
       } else {
-        console.log(r);
         return r;
       }
     });

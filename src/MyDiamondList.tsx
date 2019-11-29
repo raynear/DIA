@@ -114,7 +114,6 @@ function MyDiamondList(props: any) {
   };
 
   const handleClick = (e: React.MouseEvent<unknown>, name: string) => {
-    console.log(rows[name]);
     props.history.push("/DIA/Diamond/" + name.toString());
   }
   // { Merchant, Clarity, Cut, Carat, Color, Price, Certification, Datetime };

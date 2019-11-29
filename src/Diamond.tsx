@@ -33,7 +33,6 @@ function Diamond({ match }: any) {
       const myAddress = account[0];
       web3.eth.defaultAccount = myAddress;
       roleContract.methods.checkPlayerRole(myAddress).call().then((r: any) => {
-        console.log(r);
         const r1 = parseInt(r[0], 10);
         const r2 = parseInt(r[1], 10);
         const r3 = parseInt(r[2], 10);
@@ -75,10 +74,8 @@ function Diamond({ match }: any) {
   function submit() {
     (window as any).web3.eth.getBlockNumber((e: any, r: any) => {
       if (e) {
-        console.log(e);
         return e;
       } else {
-        console.log(r);
         return r;
       }
     });

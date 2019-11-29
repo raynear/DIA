@@ -36,17 +36,14 @@ function NewDiamond() {
   function submit() {
     (window as any).web3.eth.getBlockNumber((e: any, r: any) => {
       if (e) {
-        console.log(e);
         return e;
       } else {
-        console.log(r);
         return r;
       }
     });
     const web3 = new Web3((window as any).web3.currentProvider);
     const contract = new web3.eth.Contract(marketABI as any, marketContractAddress);
 
-    console.log(web3.givenProvider.selectedAddress);
 
     web3.eth.defaultAccount = web3.givenProvider.selectedAddress;
     web3.defaultAccount = web3.givenProvider.selectedAddress;
