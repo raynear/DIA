@@ -6,9 +6,9 @@ import { FirstPage, KeyboardArrowLeft, KeyboardArrowRight, LastPage } from '@mat
 
 import useStyles from "./Style";
 
-// import Web3 from "web3";
+import Web3 from "web3";
 
-import { contractAddress, abi } from "./SmartContract";
+import { marketContractAddress, marketABI } from "./SmartContract";
 
 interface ITablePaginationActionsProps {
   count: number;
@@ -68,70 +68,69 @@ function TablePaginationActions(props: ITablePaginationActionsProps) {
   );
 }
 
+interface IDiamond {
+  ID: number;
+  Clarity: string;
+  Cut: string;
+  Carat: string;
+  Color: string;
+  Price: number;
+  Status: string;
+  Certification: string;
+  Datetime: string;
+}
 
+enum DiaStatus {
+  OffSale = 0,
+  OnSale = 1,
+  Rented = 2,
+  Sold = 3
+}
+
+function DiaStatusStr(status: number) {
+  if (status === 0) {
+    return "OffSale";
+  } else if (status === 1) {
+    return "OnSale";
+  } else if (status === 2) {
+    return "Rented";
+  } else if (status === 3) {
+    return "Sold";
+  }
+  return "NoStatusExist";
+}
 
 function DiamondList(props: any) {
   const classes = useStyles();
 
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
-  const [filter, setFilter] = useState({ type: "all", OffSale: true, OnSale: true, Rented: true })
-  //  const [displayRows, setDisplayRows] = useState([
-  const displayRows = [
-    createData(0, 'IF', 'Good', '3/4', 'D', 4000000, 'Rented', 'A Certified/0xaaaa', '2019/09/10 18:35'),
-    createData(1, 'IF', 'Good', '3/4', 'D', 4000000, 'Rented', 'A Certified/0xaaaa', '2019/09/10 18:35'),
-    createData(2, 'IF', 'Good', '3/4', 'D', 4000000, 'OffSale', 'A Certified/0xaaaa', '2019/09/10 18:35'),
-    createData(3, 'IF', 'Good', '3/4', 'D', 4000000, 'OffSale', 'A Certified/0xaaaa', '2019/09/10 18:35'),
-    createData(4, 'IF', 'Good', '3/4', 'D', 4000000, 'Rented', 'A Certified/0xaaaa', '2019/09/10 18:35'),
-    createData(5, 'IF', 'Good', '3/4', 'D', 4000000, 'OffSale', 'A Certified/0xaaaa', '2019/09/10 18:35'),
-    createData(6, 'IF', 'Good', '3/4', 'D', 4000000, 'Rented', 'A Certified/0xaaaa', '2019/09/10 18:35'),
-    createData(7, 'IF', 'Good', '3/4', 'D', 4000000, 'Rented', 'A Certified/0xaaaa', '2019/09/10 18:35'),
-    createData(8, 'IF', 'Good', '3/4', 'D', 4000000, 'OnSale', 'A Certified/0xaaaa', '2019/09/10 18:35'),
-    createData(9, 'IF', 'Good', '3/4', 'D', 4000000, 'OnSale', 'A Certified/0xaaaa', '2019/09/10 18:35'),
-    createData(10, 'IF', 'Good', '3/4', 'E', 4000000, 'Rented', 'A Certified/0xaaaa', '2019/09/10 18:35'),
-    createData(11, 'IF', 'Good', '3/4', 'E', 4000000, 'Rented', 'A Certified/0xaaaa', '2019/09/10 18:35'),
-    createData(12, 'IF', 'Good', '3/4', 'E', 4000000, 'OnSale', 'A Certified/0xaaaa', '2019/09/10 18:35'),
-    createData(13, 'IF', 'Good', '3/4', 'D', 4000000, 'Rented', 'A Certified/0xaaaa', '2019/09/10 18:35'),
-    createData(14, 'IF', 'Good', '3/4', 'D', 4000000, 'OffSale', 'A Certified/0xaaaa', '2019/09/10 18:35'),
-    createData(15, 'IF', 'Good', '3/4', 'D', 4000000, 'Rented', 'A Certified/0xaaaa', '2019/09/10 18:35'),
-    createData(16, 'IF', 'Good', '3/4', 'D', 4000000, 'OffSale', 'A Certified/0xaaaa', '2019/09/10 18:35'),
-    createData(17, 'IF', 'Good', '3/4', 'D', 4000000, 'Rented', 'A Certified/0xaaaa', '2019/09/10 18:35'),
-    createData(18, 'IF', 'Good', '3/4', 'D', 4000000, 'OffSale', 'A Certified/0xaaaa', '2019/09/10 18:35'),
-    createData(19, 'IF', 'Good', '3/4', 'D', 4000000, 'Rented', 'A Certified/0xaaaa', '2019/09/10 18:35'),
-    createData(20, 'IF', 'Good', '3/4', 'D', 4000000, 'Rented', 'A Certified/0xaaaa', '2019/09/10 18:35'),
-    createData(21, 'IF', 'Good', '3/4', 'D', 4000000, 'Rented', 'A Certified/0xaaaa', '2019/09/10 18:35'),
-    createData(22, 'IF', 'Good', '3/4', 'D', 4000000, 'Rented', 'A Certified/0xaaaa', '2019/09/10 18:35'),
-  ].sort((a, b) => (a.Datetime < b.Datetime ? -1 : 1));
+  const [filter, setFilter] = useState({ type: "all", OffSale: false, OnSale: false, Rented: false, Sold: false })
+  const [displayRows, setDisplayRows] = useState<IDiamond[]>([]);
 
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, displayRows.length - page * rowsPerPage);
 
   useEffect(() => {
-    const mycontract = (window as any).web3.eth.contract(abi);
-    const contract = mycontract.at(contractAddress);
-    //    setDisplayRows(displayRows.push({ ID: 23, Cut: 'IF', Clarity: 'Good', Carat: '3/4', Color: 'G', Price: 4000000, Certification: 'A Certified/0xaaaa', Datetime: '2019/09/10 18:35' }))
+    const web3 = new Web3((window as any).web3.currentProvider);
+    const contract = new web3.eth.Contract(marketABI as any, marketContractAddress);
 
-    contract.getDiamonds((e: any, r: any) => {
-      console.log("get Diamonds!!!")
-      console.log(r);
-    });
+    contract.methods.getDiamonds().call().then((r: any) => {
+      const tmpDisplayRows = displayRows;
+      for (let j = 0; j < r[0].length; j++) {
+        tmpDisplayRows.push({ ID: r[0][j], Clarity: r[1][j], Cut: r[2][j], Carat: r[3][j], Color: r[4][j], Price: r[5][j], Status: r[6][j], Certification: "cert", Datetime: "datetime" });
+      }
+      setDisplayRows(tmpDisplayRows)
+      setFilter({ ...filter, OffSale: true, OnSale: true, Rented: true, Sold: true })
+    })
   }, [])
 
-  function createData(ID: number, Clarity: string, Cut: string, Carat: string, Color: string, Price: number, Status: string, Certification: string, Datetime: string) {
-    return { ID, Clarity, Cut, Carat, Color, Price, Status, Certification, Datetime };
-  }
+  // function createData(ID: number, Clarity: string, Cut: string, Carat: string, Color: string, Price: number, Status: string, Certification: string, Datetime: string) {
+  //   console.log({ ID, Clarity, Cut, Carat, Color, Price, Status, Certification, Datetime });
+  //   return { ID, Clarity, Cut, Carat, Color, Price, Status, Certification, Datetime };
+  // }
 
   const handleChangePage = (event: React.MouseEvent<HTMLButtonElement> | null, newPage: number) => {
     setPage(newPage);
-
-    const mycontract = (window as any).web3.eth.contract(abi);
-    const contract = mycontract.at(contractAddress);
-    contract.getDiamonds((e: any, r: any) => {
-      console.log("get Diamonds!!!")
-      console.log(r);
-      //    rows.push(createData());
-      //    rows.sort((a, b) => (a.Datetime < b.Datetime ? -1 : 1));
-    });
-
   };
 
   const handleChangeRowsPerPage = (
@@ -139,6 +138,7 @@ function DiamondList(props: any) {
   ) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
+    console.log(displayRows);
   };
 
   const handleClick = (e: React.MouseEvent<unknown>, name: string) => {
@@ -162,11 +162,13 @@ function DiamondList(props: any) {
   }
 
   function filtering(obj: any) {
-    if (filter.OffSale && obj.Status.indexOf("OffSale") !== -1) {
+    if (filter.OffSale && parseInt(obj.Status, 10) === DiaStatus.OffSale) {
       return true;
-    } else if (filter.OnSale && obj.Status.indexOf("OnSale") !== -1) {
+    } else if (filter.OnSale && parseInt(obj.Status, 10) === DiaStatus.OnSale) {
       return true;
-    } else if (filter.Rented && obj.Status.indexOf("Rented") !== -1) {
+    } else if (filter.Rented && parseInt(obj.Status, 10) === DiaStatus.Rented) {
+      return true;
+    } else if (filter.Sold && parseInt(obj.Status, 10) === DiaStatus.Sold) {
       return true;
     }
     return false;
@@ -198,6 +200,10 @@ function DiamondList(props: any) {
                 control={<Checkbox checked={filter.Rented} onChange={() => handleChange('Rented')} value="Rented" />}
                 label="Rented"
               />
+              <FormControlLabel
+                control={<Checkbox checked={filter.Sold} onChange={() => handleChange('Sold')} value="Sold" />}
+                label="Sold"
+              />
               <Table className={classes.table} size="small">
                 <TableHead>
                   <TableRow>
@@ -221,14 +227,14 @@ function DiamondList(props: any) {
                       <TableCell align="center">{row.Carat}</TableCell>
                       <TableCell align="center">{row.Color}</TableCell>
                       <TableCell align="right">{row.Price}</TableCell>
-                      <TableCell align="right">{row.Status}</TableCell>
+                      <TableCell align="right">{DiaStatusStr(parseInt(row.Status, 10))}</TableCell>
                       <TableCell align="right">{row.Certification}</TableCell>
                       <TableCell align="right">{row.Datetime}</TableCell>
                     </TableRow>
                   ))}
                   {emptyRows > 0 && (
                     <TableRow style={{ height: 33 * emptyRows }}>
-                      <TableCell colSpan={8} />
+                      <TableCell colSpan={9} />
                     </TableRow>
                   )}
                 </TableBody>
@@ -236,7 +242,7 @@ function DiamondList(props: any) {
                   <TableRow>
                     <TablePagination
                       rowsPerPageOptions={[10, 20, 30, { label: 'All', value: -1 }]}
-                      colSpan={8}
+                      colSpan={9}
                       count={displayRows.filter((obj: any) => filtering(obj)).length}
                       rowsPerPage={rowsPerPage}
                       page={page}

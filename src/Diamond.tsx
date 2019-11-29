@@ -5,7 +5,7 @@ import { Typography, Container, Grid, Paper, Button } from "@material-ui/core";
 import Web3 from "web3";
 
 import useStyles from "./Style";
-import { playerRoleContractAddress, playerRoleABI } from "./SmartContract";
+import { playerRoleContractAddress, playerRoleABI, marketContractAddress, marketABI } from "./SmartContract";
 // import { ContractAddress, ContractABI } from "./ContractInfo";
 
 
@@ -15,29 +15,40 @@ function Diamond({ match }: any) {
   const classes = useStyles();
   //  const id = match.params.id;
 
-  const [values, setValues] = useState({ clarity: '', cut: '', carat: '', color: '', price: 0, id: '', celler: '', certinfo: '' })
+  const [values, setValues] = useState({ clarity: '', cut: '', carat: '', color: '', price: 0, id: '', certinfo: '' })
   const [role, setRole] = useState(0);
   const [inMyList, setInMyList] = useState(false);
 
   useEffect(() => {
-    const myAddress = (window as any).web3.eth.accounts[0];
-    const mycontract = (window as any).web3.eth.contract(playerRoleABI);
-    const contract = mycontract.at(playerRoleContractAddress);
+    const web3 = new Web3((window as any).web3.currentProvider);
+    const marketContract = new web3.eth.Contract(marketABI as any, marketContractAddress);
 
-    (window as any).web3.eth.defaultAccount = (window as any).web3.eth.accounts[0]
-    contract.checkPlayerRole(myAddress, (e: any, r: any) => {
-      if (r[0].toNumber() === 1) {
+    marketContract.methods.getDiamond(match.params.ID).call().then((r: any) => {
+      setValues({ clarity: r[1], cut: r[2], carat: r[3], color: r[4], price: r[5], id: r[0], certinfo: r[6] })
+    })
+
+    const myAddress = web3.givenProvider.selectedAddress;
+    const roleContract = new web3.eth.Contract(playerRoleABI as any, playerRoleContractAddress);
+
+    web3.eth.defaultAccount = myAddress;
+    roleContract.methods.checkPlayerRole(myAddress).call().then((r: any) => {
+      console.log(r);
+      const r1 = parseInt(r[0], 10);
+      const r2 = parseInt(r[1], 10);
+      const r3 = parseInt(r[2], 10);
+
+      if (r1 === 1 || r2 === 1 || r3 === 1) {
         setRole(1);
-      } else if (r[1].toNumber() === 1) {
+      } else if (r1 === 2 || r2 === 2 || r3 === 2) {
         setRole(2);
-      } else if (r[2].toNumber() === 1) {
+      } else if (r1 === 3 || r2 === 3 || r3 === 3) {
         setRole(3);
       }
     })
 
     setInMyList(inMyCookieList(parseInt(match.params.ID, 10)));
 
-    setValues({ clarity: 'VVS', cut: 'Good', carat: '3/4', color: 'F', price: 4000000, id: match.params.ID, celler: 'AA 도매상', certinfo: 'BB에서 인증 되었음' });
+    setValues({ clarity: 'VVS', cut: 'Good', carat: '3/4', color: 'F', price: 4000000, id: match.params.ID, certinfo: 'BB에서 인증 되었음' });
   }, [])
 
   window.addEventListener('load', async () => {
@@ -51,19 +62,15 @@ function Diamond({ match }: any) {
     for (const i in Cookies) {
       if (Cookies[i].split("=")[0].trim() === "MyDiaList") {
         const DiaList = JSON.parse(Cookies[i].split("=")[1]);
-        console.log(DiaList, id);
         if (DiaList.includes(id)) {
-          console.log("true");
           return true;
         }
       }
     }
-    console.log("false");
     return false;
   }
 
   function submit() {
-    console.log((window as any).web3.currentProvider.selectedAddress);
     (window as any).web3.eth.getBlockNumber((e: any, r: any) => {
       if (e) {
         console.log(e);
@@ -73,11 +80,6 @@ function Diamond({ match }: any) {
         return r;
       }
     });
-    inMyCookieList(match.params.ID);
-  }
-
-  function pushCookie() {
-    document.cookie = "MyDiaList=[1,3,5,8,10]"
     inMyCookieList(match.params.ID);
   }
 
@@ -91,9 +93,6 @@ function Diamond({ match }: any) {
               <Grid container={true} className={classes.container}>
                 <Grid item={true} className={classes.grid} xs={12} md={6} lg={6}>
                   <Typography>매물 ID: {values.id}</Typography>
-                </Grid>
-                <Grid item={true} className={classes.grid} xs={12} md={6} lg={6}>
-                  <Typography>판매자: {values.celler}</Typography>
                 </Grid>
                 <Grid item={true} className={classes.grid} xs={12} md={6} lg={6}>
                   <Typography>가격: {values.price}</Typography>
@@ -141,14 +140,6 @@ function Diamond({ match }: any) {
                     </Grid>
                   </>
                 }
-
-                <br />
-                <br />
-                <br />
-                <br />
-                <Grid item={true} className={classes.grid} xs={12} md={12} lg={12}>
-                  <Button fullWidth={true} variant="contained" color="primary" onClick={pushCookie}>Set Cookie</Button>
-                </Grid>
               </Grid>
             </Paper>
           </Grid>

@@ -7,7 +7,7 @@ import useStyles from "./Style";
 
 import Web3 from "web3";
 
-import { contractAddress, abi } from "./SmartContract";
+import { marketContractAddress, marketABI } from "./SmartContract";
 
 function NewDiamond() {
   const classes = useStyles();
@@ -43,12 +43,16 @@ function NewDiamond() {
         return r;
       }
     });
-    console.log((window as any).web3.eth.accounts);
-    const mycontract = (window as any).web3.eth.contract(abi);
-    const contract = mycontract.at(contractAddress);
+    const web3 = new Web3((window as any).web3.currentProvider);
+    const contract = new web3.eth.Contract(marketABI as any, marketContractAddress);
 
-    (window as any).web3.eth.defaultAccount = (window as any).web3.eth.accounts[0]
-    contract.register(fourC.cut, fourC.color, fourC.clarity, fourC.carat, 0, (e: any, r: any) => { console.log(r) });
+    console.log(web3.givenProvider.selectedAddress);
+
+    web3.eth.defaultAccount = web3.givenProvider.selectedAddress;
+    web3.defaultAccount = web3.givenProvider.selectedAddress;
+    contract.methods.register(fourC.cut, fourC.color, fourC.clarity, fourC.carat, 0).send({
+      from: web3.givenProvider.selectedAddress
+    }).then((e: any, r: any) => { console.log(e, r) });
     //    contract.methods.register(fourC.cut, fourC.color, fourC.clarity, fourC.carat, 0, (e: any, r: any) => { console.log(r) })
   }
 
