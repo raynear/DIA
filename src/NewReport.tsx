@@ -1,30 +1,36 @@
 import * as React from 'react';
 import { useState } from 'react';
-
-import { TextField, Container, Grid, Paper, FormControl, InputLabel, Select, MenuItem, Button } from "@material-ui/core";
+import Web3 from "web3";
+import axios from "axios";
+import { TextField, Container, Grid, Paper, FormControl, InputLabel, Select, MenuItem, Button, Typography } from "@material-ui/core";
 
 import useStyles from "./Style";
 
-import Web3 from "web3";
 
-import { marketContractAddress, marketABI } from "./SmartContract";
+import { marketContractAddress, marketABI, reportContractAddress, reportABI } from "./SmartContract";
 
-function NewDiamond() {
+function NewReport() {
   const classes = useStyles();
 
   const inputLabel = React.useRef<HTMLLabelElement>(null);
 
-  const [certInfo, setCertInfo] = useState("");
+  const [girdleCode, setGirdleCode] = useState("");
+  const [wholeSalerAddress, setWholeSalerAddress] = useState("");
+  const [fileHash, setFileHash] = useState("");
   const [fourC, setFourC] = useState({ clarity: '', cut: '', carat: '', color: '' })
-
+  const web3 = new Web3((window as any).web3.currentProvider);
   //  const web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545/'));
 
   const handleChange4C = (event: React.ChangeEvent<HTMLInputElement>) => {
     setFourC({ ...fourC, [event.target.name]: event.target.value });
   };
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setCertInfo(event.target.value);
+  const handleGirdleCodeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setGirdleCode(event.target.value);
+  };
+
+  const handleWholeSalerAddressChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setWholeSalerAddress(event.target.value);
   };
 
   window.addEventListener('load', async () => {
@@ -32,6 +38,15 @@ function NewDiamond() {
       (window as any).web3 = new Web3((window as any).web3.currentProvider);
     }
   });
+
+  const handleReportChange = (event: any) => {
+    const reader = new FileReader();
+    reader.onload = (e: any) => {
+      const hashed = web3.utils.keccak256(e.target.result);
+      setFileHash(hashed);
+    }
+    reader.readAsText(event.target.files[0]);
+  }
 
   function submit() {
     (window as any).web3.eth.getBlockNumber((e: any, r: any) => {
@@ -41,13 +56,32 @@ function NewDiamond() {
         return r;
       }
     });
-    const web3 = new Web3((window as any).web3.currentProvider);
-    const contract = new web3.eth.Contract(marketABI as any, marketContractAddress);
 
+
+    console.log(fileHash);
+
+    axios.post('http://localhost:3333/registerReport', {
+      cut: fourC.cut,
+      color: fourC.color,
+      clarity: fourC.clarity,
+      carat: fourC.carat,
+      girdleCode: { girdleCode },
+      issuer: web3.givenProvider.selectedAddress,
+      reportHash: fileHash
+    }).then((response: any) => {
+      console.log(response);
+      const reportContract = new web3.eth.Contract(reportABI as any, reportContractAddress);
+      reportContract.methods.register(response.girdleCode, response.ppRoot, response.schema).send({
+        from: web3.givenProvider.selectedAddress
+      }).then((e: any, r: any) => { console.log(e, r) });
+
+    });
 
     web3.eth.defaultAccount = web3.givenProvider.selectedAddress;
     web3.defaultAccount = web3.givenProvider.selectedAddress;
-    contract.methods.register(fourC.cut, fourC.color, fourC.clarity, fourC.carat, 0).send({
+
+    const marketContract = new web3.eth.Contract(marketABI as any, marketContractAddress);
+    marketContract.methods.register(fourC.cut, fourC.color, fourC.clarity, fourC.carat, 0).send({
       from: web3.givenProvider.selectedAddress
     }).then((e: any, r: any) => { console.log(e, r) });
     //    contract.methods.register(fourC.cut, fourC.color, fourC.clarity, fourC.carat, 0, (e: any, r: any) => { console.log(r) })
@@ -58,18 +92,40 @@ function NewDiamond() {
       <Container maxWidth="lg" className={classes.rootcontainer}>
         <Grid container={true} className={classes.container}>
           <Grid item={true} xs={12} md={12} lg={12}>
+            <div className={classes.listImg}>
+              <Typography variant="h2" color="textSecondary" className={classes.listText}>New Report</Typography>
+            </div>
+          </Grid>
+          <Grid item={true} xs={12} md={12} lg={12}>
             <Paper style={{ textAlign: "right" }}>
               <Grid container={true} className={classes.container}>
-                <Grid item={true} className={classes.grid} xs={12} md={12} lg={12}>
+                <Grid item={true} className={classes.grid} xs={6} md={6} lg={6}>
                   <TextField
                     required={true}
-                    id="Certification"
-                    name="certification"
-                    value={certInfo}
-                    label="감정정보"
+                    id="girdleCode"
+                    name="girdleCode"
+                    value={girdleCode}
+                    label="Girdle Code"
                     fullWidth={true}
-                    onChange={handleChange}
+                    onChange={handleGirdleCodeChange}
                   />
+                </Grid>
+                <Grid item={true} className={classes.grid} xs={6} md={6} lg={6}>
+                  <TextField
+                    required={true}
+                    id="wholeSalerAddress"
+                    name="wholeSalerAddress"
+                    value={wholeSalerAddress}
+                    label="WholeSalerAddress"
+                    fullWidth={true}
+                    onChange={handleWholeSalerAddressChange}
+                  />
+                </Grid>
+                <Grid item={true} className={classes.grid} xs={12} md={12} lg={12}>
+                  <Button variant="contained" component="label">
+                    <Typography>{"변경"}</Typography>
+                    <input id={"file-input"} style={{ display: 'none' }} type="file" name="reportFile" onChange={handleReportChange} />
+                  </Button>
                 </Grid>
                 <Grid item={true} className={classes.grid} xs={6} md={6} lg={6}>
                   <FormControl variant="outlined" className={classes.formControl}>
@@ -203,4 +259,4 @@ function NewDiamond() {
   );
 }
 
-export default NewDiamond;
+export default NewReport;

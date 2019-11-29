@@ -11,63 +11,30 @@ import useStyles from "./Style";
 function Header() {
   const classes = useStyles();
 
-  //  const [appBarFlag, setAppBarFlag] = useState(true);
-  /*
-    useEffect(() => {
-      window.addEventListener('scroll', ScrollHandler);
-    }, [])
-  
-    function ScrollHandler(e: any) {
-      if (window.scrollY > 40 && appBarScroll !== classes.appBarColored) {
-        console.log("Grey", window.scrollY);
-        setAppBarScroll(classes.appBarColored);
-      } else if (window.scrollY < 40 && appBarScroll !== classes.appBar) {
-        console.log("Invisible", window.scrollY);
-        setAppBarScroll(classes.appBar);
-      }
-    }
-  */
-  // useEffect(() => {
-  //   window.addEventListener('scroll', ScrollHandler);
-  // }, [])
-
-  // function ScrollHandler(e: any) {
-  //   if (window.scrollY > 40) {
-  //     console.log("Grey", window.scrollY);
-  //     setAppBarFlag(false);
-  //     //        setAppBarScroll(classes.appBarColored);
-  //   } else if (window.scrollY < 40) {
-  //     console.log("Invisible", window.scrollY);
-  //     setAppBarFlag(true);
-  //     //        setAppBarScroll(classes.appBar);
-  //   }
-  // }
-
-  // let appBarScroll;
-  // if (appBarFlag) {
-  //   appBarScroll = classes.appBar;
-  // } else {
-  //   appBarScroll = classes.appBarColored;
-  // }
-  //  let appBarScroll = (appBarFlag === true && classes.appBar) || (appBarFlag === false && classes.appBarColored);
   return (
-    <Toolbar className={classes.toolbar}>
-      <Link className={classes.toolbarLink} color="primary" noWrap={true} variant="h6" href="/DIA/">
-        Wiggler는?
+    <>
+      <Toolbar className={classes.toolbar}>
+        <Link className={classes.toolbarLink} color="textPrimary" align="center" noWrap={true} variant="h5" href="/DIA/">
+          <b>Wiggler</b>
         </Link>
-      <Link className={classes.toolbarLink} color="primary" noWrap={true} variant="h6" href="/DIA/DiamondList">
-        마켓
+      </Toolbar>
+      <Toolbar className={classes.toolbar}>
+        <Link className={classes.toolbarLink} color="primary" noWrap={true} variant="h6" href="/DIA/Config">{" "}</Link>
+        <Link className={classes.toolbarLink} color="primary" noWrap={true} variant="h6" href="/DIA/DiamondList">
+          Market
         </Link>
-      <Link className={classes.toolbarLink} color="primary" noWrap={true} variant="h6" href="/DIA/MyDiamondList">
-        My Report
+        <Link className={classes.toolbarLink} color="primary" noWrap={true} variant="h6" href="/DIA/MyReportList">
+          My Report
         </Link>
-      <Link className={classes.toolbarLink} color="primary" noWrap={true} variant="h6" href="/DIA/NewDiamond">
-        감정원
+        <Link className={classes.toolbarLink} color="primary" noWrap={true} variant="h6" href="/DIA/NewReport">
+          New Report
         </Link>
-      <Link className={classes.toolbarLink} color="primary" noWrap={true} variant="h6" href="/DIA/Investor">
-        투자자
+        <Link className={classes.toolbarLink} color="primary" noWrap={true} variant="h6" href="/DIA/Investor">
+          Investor
         </Link>
-    </Toolbar>
+        <Link className={classes.toolbarLink} color="primary" noWrap={true} variant="h6" href="/DIA/Config">{" "}</Link>
+      </Toolbar>
+    </>
   );
 }
 

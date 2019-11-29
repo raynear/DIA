@@ -620,4 +620,55 @@ const marketABI = [
   }
 ];
 
-export { playerRoleContractAddress, playerRoleABI, marketContractAddress, marketABI, contractAddress, abi };
+const reportContractAddress = "0x586264DBc576F29AB184ce2208a05CFcaF07570F";
+const reportABI = [
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "internalType": "bytes4",
+        "name": "interfaceId",
+        "type": "bytes4"
+      }
+    ],
+    "name": "supportsInterface",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "_identifier",
+        "type": "bytes32"
+      }
+    ],
+    "name": "getAnchorById",
+    "outputs": [
+      {
+        "internalType": "bytes32",
+        "name": "identifier",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "bytes32",
+        "name": "merkleRoot",
+        "type": "bytes32"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  }
+];
+
+export { playerRoleContractAddress, playerRoleABI, marketContractAddress, marketABI, contractAddress, abi, reportContractAddress, reportABI };

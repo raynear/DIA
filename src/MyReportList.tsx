@@ -94,7 +94,7 @@ const rows = [
   createData(22, 'IF', 'Good', '3/4', 'D', 'A Certified/0xaaaa', '2019/09/10 18:35'),
 ].sort((a, b) => (a.Datetime < b.Datetime ? -1 : 1));
 
-function MyDiamondList(props: any) {
+function MyReportList(props: any) {
   const classes = useStyles();
 
   const [page, setPage] = React.useState(0);
@@ -123,7 +123,7 @@ function MyDiamondList(props: any) {
         <Grid container={true} className={classes.container}>
           <Grid item={true} className={classes.grid} xs={12} md={12} lg={12}>
             <div className={classes.listImg}>
-              <Typography variant="h2" color="textSecondary" className={classes.listText}>My Diamond List</Typography>
+              <Typography variant="h2" color="textSecondary" className={classes.listText}>My Report List</Typography>
             </div>
             <Paper>
               <Table className={classes.table} size="small">
@@ -183,4 +183,4 @@ function MyDiamondList(props: any) {
   );
 }
 
-export default MyDiamondList;
+export default MyReportList;

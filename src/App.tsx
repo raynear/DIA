@@ -7,8 +7,9 @@ import Web3 from "web3";
 
 import Header from './Header';
 import LandingPage from './LandingPage';
-import NewDiamond from './NewDiamond';
-import MyDiamondList from './MyDiamondList';
+import NewReport from './NewReport';
+import MyReportList from './MyReportList';
+import Report from './Report';
 import DiamondList from './DiamondList';
 import Diamond from './Diamond';
 import Investor from './Investor';
@@ -47,10 +48,11 @@ function App() {
         <Router>
           <Switch>
             <Route exact={true} path="/DIA/" component={LandingPage} />
-            <Route exact={true} path="/DIA/MyDiamondList" component={MyDiamondList} />
-            <Route exact={true} path="/DIA/NewDiamond" component={NewDiamond} />
-            <Route exact={true} path="/DIA/DiamondList" component={DiamondList} />
             <Route exact={true} path="/DIA/Diamond/:ID" component={Diamond} />
+            <Route exact={true} path="/DIA/DiamondList" component={DiamondList} />
+            <Route exact={true} path="/DIA/NewReport" component={NewReport} />
+            <Route exact={true} path="/DIA/Report/:ID" component={Report} />
+            <Route exact={true} path="/DIA/MyReportList" component={MyReportList} />
             <Route exact={true} path="/DIA/Investor" component={Investor} />
             <Route exact={true} path="/DIA/Config" component={Config} />
           </Switch>

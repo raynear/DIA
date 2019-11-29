@@ -107,8 +107,10 @@ const useStyles = makeStyles((theme: Theme) =>
       flexGrow: 1
     },
     toolbar: {
+      borderBottom: `1px solid ${theme.palette.divider}`,
       justifyContent: 'space-between',
       overflowX: 'auto',
+      textAlign: 'center',
     },
     toolbarLink: {
       padding: theme.spacing(1),
