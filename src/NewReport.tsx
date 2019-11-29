@@ -7,14 +7,14 @@ import { TextField, Container, Grid, Paper, FormControl, InputLabel, Select, Men
 import useStyles from "./Style";
 
 
-import { marketContractAddress, marketABI, reportContractAddress, reportABI } from "./SmartContract";
+import { Gemmologist, reportContractAddress, reportABI } from "./SmartContract";
 
 function NewReport() {
   const classes = useStyles();
 
   const inputLabel = React.useRef<HTMLLabelElement>(null);
 
-  const [girdleCode, setGirdleCode] = useState("");
+  const [girdle, setGirdle] = useState("");
   const [wholeSalerAddress, setWholeSalerAddress] = useState("");
   const [fileHash, setFileHash] = useState("");
   const [fourC, setFourC] = useState({ clarity: '', cut: '', carat: '', color: '' })
@@ -25,8 +25,8 @@ function NewReport() {
     setFourC({ ...fourC, [event.target.name]: event.target.value });
   };
 
-  const handleGirdleCodeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setGirdleCode(event.target.value);
+  const handleGirdleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setGirdle(event.target.value);
   };
 
   const handleWholeSalerAddressChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -59,32 +59,29 @@ function NewReport() {
 
 
     console.log(fileHash);
-
+    axios.defaults.headers.post['Content-Type'] ='application/json';
     axios.post('http://localhost:3333/registerReport', {
+      headers:{
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "GET, POST, PATCH, PUT, DELETE, OPTIONS",
+          "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token"
+      },
       cut: fourC.cut,
       color: fourC.color,
       clarity: fourC.clarity,
       carat: fourC.carat,
-      girdleCode: { girdleCode },
-      issuer: web3.givenProvider.selectedAddress,
-      reportHash: fileHash
+      girdleCode: girdle,
+      issuer: Gemmologist,// web3.givenProvider.selectedAddress,
+      reportHash: fileHash,
+      wholeSaler: wholeSalerAddress
     }).then((response: any) => {
       console.log(response);
       const reportContract = new web3.eth.Contract(reportABI as any, reportContractAddress);
-      reportContract.methods.register(response.girdleCode, response.ppRoot, response.schema).send({
+      reportContract.methods.register(response.data.girdleCode, response.data.ppRoot, JSON.stringify(response.data.schema)).send({
         from: web3.givenProvider.selectedAddress
       }).then((e: any, r: any) => { console.log(e, r) });
 
     });
-
-    web3.eth.defaultAccount = web3.givenProvider.selectedAddress;
-    web3.defaultAccount = web3.givenProvider.selectedAddress;
-
-    const marketContract = new web3.eth.Contract(marketABI as any, marketContractAddress);
-    marketContract.methods.register(fourC.cut, fourC.color, fourC.clarity, fourC.carat, 0).send({
-      from: web3.givenProvider.selectedAddress
-    }).then((e: any, r: any) => { console.log(e, r) });
-    //    contract.methods.register(fourC.cut, fourC.color, fourC.clarity, fourC.carat, 0, (e: any, r: any) => { console.log(r) })
   }
 
   return (
@@ -102,12 +99,12 @@ function NewReport() {
                 <Grid item={true} className={classes.grid} xs={6} md={6} lg={6}>
                   <TextField
                     required={true}
-                    id="girdleCode"
-                    name="girdleCode"
-                    value={girdleCode}
+                    id="girdle"
+                    name="girdle"
+                    value={girdle}
                     label="Girdle Code"
                     fullWidth={true}
-                    onChange={handleGirdleCodeChange}
+                    onChange={handleGirdleChange}
                   />
                 </Grid>
                 <Grid item={true} className={classes.grid} xs={6} md={6} lg={6}>

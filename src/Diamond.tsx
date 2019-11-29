@@ -5,7 +5,7 @@ import { Typography, Container, Grid, Paper, Button } from "@material-ui/core";
 import Web3 from "web3";
 
 import useStyles from "./Style";
-import { playerRoleContractAddress, playerRoleABI, marketContractAddress, marketABI } from "./SmartContract";
+import { marketContractAddress, marketABI, Retailer } from "./SmartContract";
 // import { ContractAddress, ContractABI } from "./ContractInfo";
 
 
@@ -14,42 +14,20 @@ import { playerRoleContractAddress, playerRoleABI, marketContractAddress, market
 function Diamond({ match }: any) {
   const classes = useStyles();
   //  const id = match.params.id;
+  const web3 = new Web3((window as any).web3.currentProvider);
+  const marketContract = new web3.eth.Contract(marketABI as any, marketContractAddress);
 
-  const [values, setValues] = useState({ clarity: '', cut: '', carat: '', color: '', price: 0, id: '', certinfo: '' })
-  const [role, setRole] = useState(0);
+  const [values, setValues] = useState({ clarity: '', cut: '', carat: '', color: '', price: 0, id: '', reportHash: '' })
   const [inMyList, setInMyList] = useState(false);
 
+
   useEffect(() => {
-    const web3 = new Web3((window as any).web3.currentProvider);
-    const marketContract = new web3.eth.Contract(marketABI as any, marketContractAddress);
 
     marketContract.methods.getDiamond(match.params.ID).call().then((r: any) => {
-      setValues({ clarity: r[1], cut: r[2], carat: r[3], color: r[4], price: r[5], id: r[0], certinfo: r[6] })
-    })
-
-    const roleContract = new web3.eth.Contract(playerRoleABI as any, playerRoleContractAddress);
-
-    web3.eth.getAccounts().then((account: any) => {
-      const myAddress = account[0];
-      web3.eth.defaultAccount = myAddress;
-      roleContract.methods.checkPlayerRole(myAddress).call().then((r: any) => {
-        const r1 = parseInt(r[0], 10);
-        const r2 = parseInt(r[1], 10);
-        const r3 = parseInt(r[2], 10);
-
-        if (r1 === 1 || r2 === 1 || r3 === 1) {
-          setRole(1);
-        } else if (r1 === 2 || r2 === 2 || r3 === 2) {
-          setRole(2);
-        } else if (r1 === 3 || r2 === 3 || r3 === 3) {
-          setRole(3);
-        }
-      })
-
-      setInMyList(inMyCookieList(parseInt(match.params.ID, 10)));
-
-      setValues({ clarity: 'VVS', cut: 'Good', carat: '3/4', color: 'F', price: 4000000, id: match.params.ID, certinfo: 'BB에서 인증 되었음' });
+      setValues({ clarity: r[1], cut: r[2], carat: r[3], color: r[4], price: r[5], id: r[0], reportHash: r[6] })
     });
+
+    setInMyList(inMyCookieList(parseInt(match.params.ID,10)));
   }, [])
 
   window.addEventListener('load', async () => {
@@ -57,6 +35,20 @@ function Diamond({ match }: any) {
       (window as any).web3 = new Web3((window as any).web3.currentProvider);
     }
   });
+
+  function setMyCookieList(id:number) {
+    const Cookies = document.cookie.split(";");
+    let DiaList;
+    for (const i in Cookies) {
+      if (Cookies[i].split("=")[0].trim() === "MyDiaList") {
+        DiaList = JSON.parse(Cookies[i].split("=")[1]);
+        if (!DiaList.includes(id)) {
+          DiaList.push(id);
+        }
+      }
+    }
+    document.cookie = "MyDiaList="+JSON.stringify(DiaList);
+  }
 
   function inMyCookieList(id: number) {
     const Cookies = document.cookie.split(";");
@@ -71,15 +63,22 @@ function Diamond({ match }: any) {
     return false;
   }
 
-  function submit() {
-    (window as any).web3.eth.getBlockNumber((e: any, r: any) => {
-      if (e) {
-        return e;
-      } else {
-        return r;
-      }
+  function rentDia() {
+    marketContract.methods.rentDiamond(parseInt(match.params.ID,10)).send({from:Retailer}).then((r:any) => {
+      console.log(r);
+      setMyCookieList(parseInt(match.params.ID,10));
     });
-    inMyCookieList(match.params.ID);
+  }
+
+  function returnDia() {
+    console.log("returnDia");
+  }
+
+  function submit() {
+    console.log("submit");
+    marketContract.methods.sattleforDeposit(parseInt(match.params.ID,10), 10).send({from:Retailer}).then((r:any)=>{
+      console.log(r);
+    })
   }
 
   return (
@@ -90,13 +89,13 @@ function Diamond({ match }: any) {
             <Paper style={{ textAlign: "right" }}>
               <Grid container={true} className={classes.container}>
                 <Grid item={true} className={classes.grid} xs={12} md={6} lg={6}>
-                  <Typography>매물 ID: {values.id}</Typography>
+                  <Typography>ID: {values.id}</Typography>
                 </Grid>
                 <Grid item={true} className={classes.grid} xs={12} md={6} lg={6}>
-                  <Typography>가격: {values.price}</Typography>
+                  <Typography>Price: {values.price}</Typography>
                 </Grid>
                 <Grid item={true} className={classes.grid} xs={12} md={6} lg={6}>
-                  <Typography>감정 정보</Typography>
+                  <Typography>Report Hash: {values.reportHash}</Typography>
                 </Grid>
                 <Grid item={true} className={classes.grid} xs={6} md={3} lg={3}>
                   <Typography>
@@ -118,23 +117,18 @@ function Diamond({ match }: any) {
                     Color: {values.color}
                   </Typography>
                 </Grid>
-                {(role === 1 && inMyList) &&
+                {!inMyList &&
                   <Grid item={true} className={classes.grid} xs={12} md={12} lg={12}>
-                    <Button fullWidth={true} variant="contained" color="primary" onClick={submit}>판매 리스트에 올리기!</Button>
+                    <Button fullWidth={true} variant="contained" color="primary" onClick={rentDia}>wanna Rent</Button>
                   </Grid>
                 }
-                {(role === 2 && !inMyList) &&
-                  <Grid item={true} className={classes.grid} xs={12} md={12} lg={12}>
-                    <Button fullWidth={true} variant="contained" color="primary" onClick={submit}>살께요!</Button>
-                  </Grid>
-                }
-                {(role === 2 && inMyList) &&
+                {inMyList &&
                   <>
                     <Grid item={true} className={classes.grid} xs={6} md={6} lg={6}>
-                      <Button fullWidth={true} variant="contained" color="primary" onClick={submit}>환불!</Button>
+                      <Button fullWidth={true} variant="contained" color="primary" onClick={returnDia}>반환</Button>
                     </Grid>
                     <Grid item={true} className={classes.grid} xs={6} md={6} lg={6}>
-                      <Button fullWidth={true} variant="contained" color="primary" onClick={submit}>판매완료(송금)!</Button>
+                      <Button fullWidth={true} variant="contained" color="primary" onClick={submit}>판매확정(송금)!</Button>
                     </Grid>
                   </>
                 }
@@ -143,7 +137,6 @@ function Diamond({ match }: any) {
           </Grid>
         </Grid>
       </Container>
-      {role}{"-"}{inMyList.toString()}
     </>
   );
 }

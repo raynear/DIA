@@ -17,7 +17,7 @@ function Config({ match }: any) {
   });
 
   function wholeSaleCookie() {
-    document.cookie = "MyDiaList=[1,3,5,8,10]"
+    document.cookie = "MyDiaList=[0,1,3,5,8,10]"
   }
 
   function retailCookie() {

@@ -51,7 +51,7 @@ function App() {
             <Route exact={true} path="/DIA/Diamond/:ID" component={Diamond} />
             <Route exact={true} path="/DIA/DiamondList" component={DiamondList} />
             <Route exact={true} path="/DIA/NewReport" component={NewReport} />
-            <Route exact={true} path="/DIA/Report/:ID" component={Report} />
+            <Route exact={true} path="/DIA/Report/:GirdleCode" component={Report} />
             <Route exact={true} path="/DIA/MyReportList" component={MyReportList} />
             <Route exact={true} path="/DIA/Investor" component={Investor} />
             <Route exact={true} path="/DIA/Config" component={Config} />

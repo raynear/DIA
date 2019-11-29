@@ -76,8 +76,7 @@ interface IDiamond {
   Color: string;
   Price: number;
   Status: string;
-  Certification: string;
-  Datetime: string;
+  ReportHash: string;
 }
 
 enum DiaStatus {
@@ -115,9 +114,10 @@ function DiamondList(props: any) {
     const contract = new web3.eth.Contract(marketABI as any, marketContractAddress);
 
     contract.methods.getDiamonds().call().then((r: any) => {
+      console.log(r);
       const tmpDisplayRows = displayRows;
       for (let j = 0; j < r[0].length; j++) {
-        tmpDisplayRows.push({ ID: r[0][j], Clarity: r[1][j], Cut: r[2][j], Carat: r[3][j], Color: r[4][j], Price: r[5][j], Status: r[6][j], Certification: "cert", Datetime: "datetime" });
+        tmpDisplayRows.push({ ID: r[0][j], Clarity: r[1][j], Cut: r[2][j], Carat: r[3][j], Color: r[4][j], Price: r[5][j], ReportHash: r[6][j], Status: r[7][j]});
       }
       setDisplayRows(tmpDisplayRows)
       setFilter({ ...filter, OffSale: true, OnSale: true, Rented: true, Sold: true })
@@ -188,7 +188,6 @@ function DiamondList(props: any) {
   }
 
   return (
-    <>
       <Container maxWidth="lg" className={classes.rootcontainer}>
         <Grid container={true} className={classes.container}>
           <Grid item={true} className={classes.grid} xs={12} md={12} lg={12}>
@@ -226,8 +225,7 @@ function DiamondList(props: any) {
                     <TableCell className={classes.tablehead} align="center">Color</TableCell>
                     <TableCell className={classes.tablehead} align="center">Price</TableCell>
                     <TableCell className={classes.tablehead} align="center">Status</TableCell>
-                    <TableCell className={classes.tablehead} align="center">Certification</TableCell>
-                    <TableCell className={classes.tablehead} align="center">Datetime</TableCell>
+                    <TableCell className={classes.tablehead} align="center">ReportHash</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -240,13 +238,12 @@ function DiamondList(props: any) {
                       <TableCell align="center">{row.Color}</TableCell>
                       <TableCell align="right">{row.Price}</TableCell>
                       <TableCell align="right">{DiaStatusStr(parseInt(row.Status, 10))}</TableCell>
-                      <TableCell align="right">{row.Certification}</TableCell>
-                      <TableCell align="right">{row.Datetime}</TableCell>
+                      <TableCell align="right">{row.ReportHash}</TableCell>
                     </TableRow>
                   ))}
                   {emptyRows > 0 && (
                     <TableRow style={{ height: 33 * emptyRows }}>
-                      <TableCell colSpan={9} />
+                      <TableCell colSpan={8} />
                     </TableRow>
                   )}
                 </TableBody>
@@ -254,7 +251,7 @@ function DiamondList(props: any) {
                   <TableRow>
                     <TablePagination
                       rowsPerPageOptions={[10, 20, 30, { label: 'All', value: -1 }]}
-                      colSpan={9}
+                      colSpan={8}
                       count={displayRows.filter((obj: any) => filtering(obj)).length}
                       rowsPerPage={rowsPerPage}
                       page={page}
@@ -272,7 +269,7 @@ function DiamondList(props: any) {
             </Paper>
           </Grid>
         </Grid>
-      </Container>    </>
+      </Container>
   );
 }
 

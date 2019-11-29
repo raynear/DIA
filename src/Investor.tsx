@@ -47,10 +47,10 @@ function Investor({ match }: any) {
   const classes = useStyles();
   //  const id = match.params.id;
 
-  const [values, setValues] = useState({ id: '', limitRate: 30, total: 100, principal: 90, profit: 10, currentStatus: "pause" })
+  const [values, setValues] = useState({ id: '', limitRate: 30, total: 100, principal: 90, profit: 10 })
 
   useEffect(() => {
-    setValues({ id: '', limitRate: 30, total: 100, principal: 90, profit: 10, currentStatus: "pause" });
+    setValues({ id: '', limitRate: 30, total: 100, principal: 90, profit: 10 });
   }, [])
 
   window.addEventListener('load', async () => {
@@ -59,24 +59,16 @@ function Investor({ match }: any) {
     }
   });
 
-  function changeLimit() {
-    (window as any).web3.eth.getBlockNumber((e: any, r: any) => {
-      if (e) {
-        return e;
-      } else {
-        return r;
-      }
-    });
+  const handleSlideChange = (e:any, newValue:number|number[]) => {
+    if(Array.isArray(newValue)){
+      setValues({...values, limitRate:newValue[0]})
+    } else {
+      setValues({...values, limitRate:newValue})
+    }
   }
 
-  function changeState() {
-    (window as any).web3.eth.getBlockNumber((e: any, r: any) => {
-      if (e) {
-        return e;
-      } else {
-        return r;
-      }
-    });
+  function changeLimit() {
+    console.log("changeLimit");
   }
 
   return (
@@ -93,23 +85,19 @@ function Investor({ match }: any) {
                   <Typography>거래당 투자 비율</Typography>
                 </Grid>
                 <Grid item={true} className={classes.grid} xs={10} md={10} lg={10}>
-                  <PrettoSlider valueLabelDisplay="auto" aria-label="pretto slider" defaultValue={20} />
+                  <PrettoSlider value={values.limitRate} onChange={handleSlideChange} valueLabelDisplay="auto" aria-label="pretto slider" defaultValue={20} />
                 </Grid>
                 <Grid item={true} className={classes.grid} xs={2} md={2} lg={2}>
                   <Button variant="contained" style={{ backgroundColor: "#52af77", color: "#FFFFFF" }} onClick={changeLimit} >투자 비율 변경</Button>
                 </Grid>
                 <Grid item={true} className={classes.grid} xs={12} md={12} lg={12}>
-                  <Typography>총액: {values.total}</Typography>
+                  <Typography>총액: {values.total} DIA</Typography>
                 </Grid>
                 <Grid item={true} className={classes.grid} xs={12} md={12} lg={12}>
-                  <Typography>원금: {values.principal}</Typography>
+                  <Typography>원금: {values.principal} DIA</Typography>
                 </Grid>
                 <Grid item={true} className={classes.grid} xs={12} md={12} lg={12}>
-                  <Typography>수익: {values.profit}</Typography>
-                </Grid>
-                <Grid item={true} className={classes.grid} xs={12} md={12} lg={12}>
-                  <Typography>상태: {values.currentStatus}</Typography>
-                  <Button fullWidth={true} variant="contained" color="primary" onClick={changeState}>투자 / 일시정지</Button>
+                  <Typography>수익: {values.profit} DIA</Typography>
                 </Grid>
               </Grid>
             </Paper>
