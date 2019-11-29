@@ -15,24 +15,24 @@ function Header() {
     <>
       <Toolbar className={classes.toolbar}>
         <Link className={classes.toolbarLink} color="textPrimary" align="center" noWrap={true} variant="h5" href="/DIA/">
-          <b>Wiggler</b>
+          <b>Diamond Chain</b>
         </Link>
       </Toolbar>
       <Toolbar className={classes.toolbar}>
-        <Link className={classes.toolbarLink} color="primary" noWrap={true} variant="h6" href="/DIA/Config">{" "}</Link>
-        <Link className={classes.toolbarLink} color="primary" noWrap={true} variant="h6" href="/DIA/DiamondList">
-          Market
+        <Link className={classes.toolbarLink} color="textSecondary" noWrap={true} variant="h6" href="/DIA/Config">{" "}</Link>
+        <Link className={classes.toolbarLink} color="textSecondary" noWrap={true} variant="subtitle1" href="/DIA/DiamondList">
+          <b>Market</b>
         </Link>
-        <Link className={classes.toolbarLink} color="primary" noWrap={true} variant="h6" href="/DIA/MyReportList">
-          My Report
+        <Link className={classes.toolbarLink} color="textSecondary" noWrap={true} variant="subtitle1" href="/DIA/MyReportList">
+          <b>My Report</b>
         </Link>
-        <Link className={classes.toolbarLink} color="primary" noWrap={true} variant="h6" href="/DIA/NewReport">
-          New Report
+        <Link className={classes.toolbarLink} color="textSecondary" noWrap={true} variant="subtitle1" href="/DIA/NewReport">
+          <b>New Report</b>
         </Link>
-        <Link className={classes.toolbarLink} color="primary" noWrap={true} variant="h6" href="/DIA/Investor">
-          Investor
+        <Link className={classes.toolbarLink} color="textSecondary" noWrap={true} variant="subtitle1" href="/DIA/Investor">
+          <b>Investor</b>
         </Link>
-        <Link className={classes.toolbarLink} color="primary" noWrap={true} variant="h6" href="/DIA/Config">{" "}</Link>
+        <Link className={classes.toolbarLink} color="textSecondary" noWrap={true} variant="subtitle1" href="/DIA/Config">{" "}</Link>
       </Toolbar>
     </>
   );

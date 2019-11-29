@@ -63,7 +63,7 @@ const useStyles = makeStyles((theme: Theme) =>
       backgroundSize: "cover",
       backgroundRepeat: "no-repeat",
       width: "calc(100%-16px)",
-      height: "150px",
+      height: "100px",
       display: "flex",
       alignItems: "center"
     },

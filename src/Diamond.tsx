@@ -27,7 +27,7 @@ function Diamond({ match }: any) {
       setValues({ clarity: r[1], cut: r[2], carat: r[3], color: r[4], price: r[5], id: r[0], reportHash: r[6] })
     });
 
-    setInMyList(inMyCookieList(parseInt(match.params.ID,10)));
+    setInMyList(inMyCookieList(parseInt(match.params.ID, 10)));
   }, [])
 
   window.addEventListener('load', async () => {
@@ -36,7 +36,7 @@ function Diamond({ match }: any) {
     }
   });
 
-  function setMyCookieList(id:number) {
+  function setMyCookieList(id: number) {
     const Cookies = document.cookie.split(";");
     let DiaList;
     for (const i in Cookies) {
@@ -47,7 +47,7 @@ function Diamond({ match }: any) {
         }
       }
     }
-    document.cookie = "MyDiaList="+JSON.stringify(DiaList);
+    document.cookie = "MyDiaList=" + JSON.stringify(DiaList);
   }
 
   function inMyCookieList(id: number) {
@@ -64,9 +64,9 @@ function Diamond({ match }: any) {
   }
 
   function rentDia() {
-    marketContract.methods.rentDiamond(parseInt(match.params.ID,10)).send({from:Retailer}).then((r:any) => {
+    marketContract.methods.rentDiamond(parseInt(match.params.ID, 10)).send({ from: Retailer }).then((r: any) => {
       console.log(r);
-      setMyCookieList(parseInt(match.params.ID,10));
+      setMyCookieList(parseInt(match.params.ID, 10));
     });
   }
 
@@ -76,7 +76,7 @@ function Diamond({ match }: any) {
 
   function submit() {
     console.log("submit");
-    marketContract.methods.sattleforDeposit(parseInt(match.params.ID,10), 10).send({from:Retailer}).then((r:any)=>{
+    marketContract.methods.sattleforDeposit(parseInt(match.params.ID, 10), 10).send({ from: Retailer }).then((r: any) => {
       console.log(r);
     })
   }
@@ -86,6 +86,9 @@ function Diamond({ match }: any) {
       <Container maxWidth="lg" className={classes.rootcontainer}>
         <Grid container={true} className={classes.container}>
           <Grid item={true} xs={12} md={12} lg={12}>
+            <div className={classes.listImg}>
+              <Typography variant="h4" color="textSecondary" className={classes.listText}>Diamond</Typography>
+            </div>
             <Paper style={{ textAlign: "right" }}>
               <Grid container={true} className={classes.container}>
                 <Grid item={true} className={classes.grid} xs={12} md={6} lg={6}>

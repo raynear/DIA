@@ -117,7 +117,7 @@ function DiamondList(props: any) {
       console.log(r);
       const tmpDisplayRows = displayRows;
       for (let j = 0; j < r[0].length; j++) {
-        tmpDisplayRows.push({ ID: r[0][j], Clarity: r[1][j], Cut: r[2][j], Carat: r[3][j], Color: r[4][j], Price: r[5][j], ReportHash: r[6][j], Status: r[7][j]});
+        tmpDisplayRows.push({ ID: r[0][j], Clarity: r[1][j], Cut: r[2][j], Carat: r[3][j], Color: r[4][j], Price: r[5][j], ReportHash: r[6][j], Status: r[7][j] });
       }
       setDisplayRows(tmpDisplayRows)
       setFilter({ ...filter, OffSale: true, OnSale: true, Rented: true, Sold: true })
@@ -188,88 +188,88 @@ function DiamondList(props: any) {
   }
 
   return (
-      <Container maxWidth="lg" className={classes.rootcontainer}>
-        <Grid container={true} className={classes.container}>
-          <Grid item={true} className={classes.grid} xs={12} md={12} lg={12}>
-            <div className={classes.listImg}>
-              <Typography variant="h2" color="textSecondary" className={classes.listText}>{filter.type} Diamond List</Typography>
-            </div>
-            <Paper style={{ textAlign: "right" }}>
-              <ButtonGroup>
-                <Button color="primary" disabled={filter.type === "All"} onClick={() => filterList("All")}>All</Button>
-                <Button color="primary" disabled={filter.type === "My"} onClick={() => filterList("My")}>My</Button>
-              </ButtonGroup>
-              <FormControlLabel
-                control={<Checkbox checked={filter.OffSale} onChange={() => handleChange('OffSale')} value="OffSale" />}
-                label="OffSale"
-              />
-              <FormControlLabel
-                control={<Checkbox checked={filter.OnSale} onChange={() => handleChange('OnSale')} value="OnSale" />}
-                label="OnSale"
-              />
-              <FormControlLabel
-                control={<Checkbox checked={filter.Rented} onChange={() => handleChange('Rented')} value="Rented" />}
-                label="Rented"
-              />
-              <FormControlLabel
-                control={<Checkbox checked={filter.Sold} onChange={() => handleChange('Sold')} value="Sold" />}
-                label="Sold"
-              />
-              <Table className={classes.table} size="small">
-                <TableHead>
-                  <TableRow>
-                    <TableCell className={classes.tablehead}>ID</TableCell>
-                    <TableCell className={classes.tablehead} align="center">Clarity</TableCell>
-                    <TableCell className={classes.tablehead} align="center">Cut</TableCell>
-                    <TableCell className={classes.tablehead} align="center">Carat</TableCell>
-                    <TableCell className={classes.tablehead} align="center">Color</TableCell>
-                    <TableCell className={classes.tablehead} align="center">Price</TableCell>
-                    <TableCell className={classes.tablehead} align="center">Status</TableCell>
-                    <TableCell className={classes.tablehead} align="center">ReportHash</TableCell>
+    <Container maxWidth="lg" className={classes.rootcontainer}>
+      <Grid container={true} className={classes.container}>
+        <Grid item={true} className={classes.grid} xs={12} md={12} lg={12}>
+          <div className={classes.listImg}>
+            <Typography variant="h4" color="textSecondary" className={classes.listText}>{filter.type} Diamond List</Typography>
+          </div>
+          <Paper style={{ textAlign: "right" }}>
+            <ButtonGroup>
+              <Button color="primary" disabled={filter.type === "All"} onClick={() => filterList("All")}>All</Button>
+              <Button color="primary" disabled={filter.type === "My"} onClick={() => filterList("My")}>My</Button>
+            </ButtonGroup>
+            <FormControlLabel
+              control={<Checkbox checked={filter.OffSale} onChange={() => handleChange('OffSale')} value="OffSale" />}
+              label="OffSale"
+            />
+            <FormControlLabel
+              control={<Checkbox checked={filter.OnSale} onChange={() => handleChange('OnSale')} value="OnSale" />}
+              label="OnSale"
+            />
+            <FormControlLabel
+              control={<Checkbox checked={filter.Rented} onChange={() => handleChange('Rented')} value="Rented" />}
+              label="Rented"
+            />
+            <FormControlLabel
+              control={<Checkbox checked={filter.Sold} onChange={() => handleChange('Sold')} value="Sold" />}
+              label="Sold"
+            />
+            <Table className={classes.table} size="small">
+              <TableHead>
+                <TableRow>
+                  <TableCell className={classes.tablehead}>ID</TableCell>
+                  <TableCell className={classes.tablehead} align="center">Clarity</TableCell>
+                  <TableCell className={classes.tablehead} align="center">Cut</TableCell>
+                  <TableCell className={classes.tablehead} align="center">Carat</TableCell>
+                  <TableCell className={classes.tablehead} align="center">Color</TableCell>
+                  <TableCell className={classes.tablehead} align="center">Price</TableCell>
+                  <TableCell className={classes.tablehead} align="center">Status</TableCell>
+                  <TableCell className={classes.tablehead} align="center">ReportHash</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {(rowsPerPage > 0 ? displayRows.filter((obj: any) => filtering(obj)).slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage) : displayRows).map((row: any) => (
+                  <TableRow key={row.ID} hover={true} onClick={(e) => handleClick(e, row.ID)}>
+                    <TableCell align="center">{row.ID}</TableCell>
+                    <TableCell align="center">{row.Clarity}</TableCell>
+                    <TableCell align="center">{row.Cut}</TableCell>
+                    <TableCell align="center">{row.Carat}</TableCell>
+                    <TableCell align="center">{row.Color}</TableCell>
+                    <TableCell align="right">{row.Price}</TableCell>
+                    <TableCell align="right">{DiaStatusStr(parseInt(row.Status, 10))}</TableCell>
+                    <TableCell align="right">{row.ReportHash}</TableCell>
                   </TableRow>
-                </TableHead>
-                <TableBody>
-                  {(rowsPerPage > 0 ? displayRows.filter((obj: any) => filtering(obj)).slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage) : displayRows).map((row: any) => (
-                    <TableRow key={row.ID} hover={true} onClick={(e) => handleClick(e, row.ID)}>
-                      <TableCell align="center">{row.ID}</TableCell>
-                      <TableCell align="center">{row.Clarity}</TableCell>
-                      <TableCell align="center">{row.Cut}</TableCell>
-                      <TableCell align="center">{row.Carat}</TableCell>
-                      <TableCell align="center">{row.Color}</TableCell>
-                      <TableCell align="right">{row.Price}</TableCell>
-                      <TableCell align="right">{DiaStatusStr(parseInt(row.Status, 10))}</TableCell>
-                      <TableCell align="right">{row.ReportHash}</TableCell>
-                    </TableRow>
-                  ))}
-                  {emptyRows > 0 && (
-                    <TableRow style={{ height: 33 * emptyRows }}>
-                      <TableCell colSpan={8} />
-                    </TableRow>
-                  )}
-                </TableBody>
-                <TableFooter>
-                  <TableRow>
-                    <TablePagination
-                      rowsPerPageOptions={[10, 20, 30, { label: 'All', value: -1 }]}
-                      colSpan={8}
-                      count={displayRows.filter((obj: any) => filtering(obj)).length}
-                      rowsPerPage={rowsPerPage}
-                      page={page}
-                      SelectProps={{
-                        inputProps: { 'aria-label': 'rows per page' },
-                        native: true,
-                      }}
-                      onChangePage={handleChangePage}
-                      onChangeRowsPerPage={handleChangeRowsPerPage}
-                      ActionsComponent={TablePaginationActions}
-                    />
+                ))}
+                {emptyRows > 0 && (
+                  <TableRow style={{ height: 33 * emptyRows }}>
+                    <TableCell colSpan={8} />
                   </TableRow>
-                </TableFooter>
-              </Table>
-            </Paper>
-          </Grid>
+                )}
+              </TableBody>
+              <TableFooter>
+                <TableRow>
+                  <TablePagination
+                    rowsPerPageOptions={[10, 20, 30, { label: 'All', value: -1 }]}
+                    colSpan={8}
+                    count={displayRows.filter((obj: any) => filtering(obj)).length}
+                    rowsPerPage={rowsPerPage}
+                    page={page}
+                    SelectProps={{
+                      inputProps: { 'aria-label': 'rows per page' },
+                      native: true,
+                    }}
+                    onChangePage={handleChangePage}
+                    onChangeRowsPerPage={handleChangeRowsPerPage}
+                    ActionsComponent={TablePaginationActions}
+                  />
+                </TableRow>
+              </TableFooter>
+            </Table>
+          </Paper>
         </Grid>
-      </Container>
+      </Grid>
+    </Container>
   );
 }
 

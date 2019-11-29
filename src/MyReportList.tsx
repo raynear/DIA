@@ -7,7 +7,7 @@ import { FirstPage, KeyboardArrowLeft, KeyboardArrowRight, LastPage } from '@mat
 import Web3 from "web3";
 import axios from "axios";
 
-import {WholeSaler} from "./SmartContract";
+import { WholeSaler } from "./SmartContract";
 
 import useStyles from "./Style";
 
@@ -101,7 +101,7 @@ function MyReportList(props: any) {
     }).then((response: any) => {
       const tmpDisplayRows = [];
       for (const i in response.data) {
-        if(parseInt(i,10)>0) {
+        if (parseInt(i, 10) > 0) {
           tmpDisplayRows.push({ Clarity: response.data[i].clarity, Cut: response.data[i].cut, Color: response.data[i].color, Carat: response.data[i].carat, GirdleCode: response.data[i].girdleCode, TokenID: response.data[i].tokenId });
         }
       }
@@ -130,7 +130,7 @@ function MyReportList(props: any) {
         <Grid container={true} className={classes.container}>
           <Grid item={true} className={classes.grid} xs={12} md={12} lg={12}>
             <div className={classes.listImg}>
-              <Typography variant="h2" color="textSecondary" className={classes.listText}>My Report List</Typography>
+              <Typography variant="h4" color="textSecondary" className={classes.listText}>My Report List</Typography>
             </div>
             <Paper>
               <Table className={classes.table} size="small">

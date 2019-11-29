@@ -59,12 +59,12 @@ function NewReport() {
 
 
     console.log(fileHash);
-    axios.defaults.headers.post['Content-Type'] ='application/json';
+    axios.defaults.headers.post['Content-Type'] = 'application/json';
     axios.post('http://localhost:3333/registerReport', {
-      headers:{
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Methods": "GET, POST, PATCH, PUT, DELETE, OPTIONS",
-          "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token"
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET, POST, PATCH, PUT, DELETE, OPTIONS",
+        "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token"
       },
       cut: fourC.cut,
       color: fourC.color,
@@ -90,7 +90,7 @@ function NewReport() {
         <Grid container={true} className={classes.container}>
           <Grid item={true} xs={12} md={12} lg={12}>
             <div className={classes.listImg}>
-              <Typography variant="h2" color="textSecondary" className={classes.listText}>New Report</Typography>
+              <Typography variant="h4" color="textSecondary" className={classes.listText}>New Report</Typography>
             </div>
           </Grid>
           <Grid item={true} xs={12} md={12} lg={12}>
@@ -120,7 +120,7 @@ function NewReport() {
                 </Grid>
                 <Grid item={true} className={classes.grid} xs={12} md={12} lg={12}>
                   <Button variant="contained" component="label">
-                    <Typography>{"변경"}</Typography>
+                    <Typography>{"Upload Diamond Report"}</Typography>
                     <input id={"file-input"} style={{ display: 'none' }} type="file" name="reportFile" onChange={handleReportChange} />
                   </Button>
                 </Grid>

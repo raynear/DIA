@@ -59,11 +59,11 @@ function Investor({ match }: any) {
     }
   });
 
-  const handleSlideChange = (e:any, newValue:number|number[]) => {
-    if(Array.isArray(newValue)){
-      setValues({...values, limitRate:newValue[0]})
+  const handleSlideChange = (e: any, newValue: number | number[]) => {
+    if (Array.isArray(newValue)) {
+      setValues({ ...values, limitRate: newValue[0] })
     } else {
-      setValues({...values, limitRate:newValue})
+      setValues({ ...values, limitRate: newValue })
     }
   }
 
@@ -76,6 +76,9 @@ function Investor({ match }: any) {
       <Container maxWidth="lg" className={classes.rootcontainer}>
         <Grid container={true} className={classes.container}>
           <Grid item={true} xs={12} md={12} lg={12}>
+            <div className={classes.listImg}>
+              <Typography variant="h4" color="textSecondary" className={classes.listText}>Investor</Typography>
+            </div>
             <Paper style={{ textAlign: "right" }}>
               <Grid container={true} className={classes.container}>
                 <Grid item={true} className={classes.grid} xs={12} md={12} lg={12}>
