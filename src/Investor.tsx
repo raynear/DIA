@@ -6,6 +6,8 @@ import { withStyles } from "@material-ui/core/styles";
 
 import Web3 from "web3";
 
+import { Investor as InvestorAddress } from "./SmartContract";
+
 import useStyles from "./Style";
 // import { ContractAddress, ContractABI } from "./ContractInfo";
 
@@ -75,14 +77,14 @@ function Investor({ match }: any) {
     <>
       <Container maxWidth="lg" className={classes.rootcontainer}>
         <Grid container={true} className={classes.container}>
-          <Grid item={true} xs={12} md={12} lg={12}>
+          <Grid item={true} className={classes.grid} xs={12} md={12} lg={12}>
             <div className={classes.listImg}>
               <Typography variant="h4" color="textSecondary" className={classes.listText}>Investor</Typography>
             </div>
             <Paper style={{ textAlign: "right" }}>
               <Grid container={true} className={classes.container}>
                 <Grid item={true} className={classes.grid} xs={12} md={12} lg={12}>
-                  <Typography>계정: {values.id}</Typography>
+                  <Typography>계정: {InvestorAddress}</Typography>
                 </Grid>
                 <Grid item={true} className={classes.grid} xs={12} md={12} lg={12}>
                   <Typography>거래당 투자 비율</Typography>

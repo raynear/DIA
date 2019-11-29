@@ -83,7 +83,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     grid: {
       margin: theme.spacing(0),
-      padding: theme.spacing(1),
+      padding: theme.spacing(0),
       textAlign: "center",
       verticalAlign: "middle"
     },

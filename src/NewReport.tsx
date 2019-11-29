@@ -88,12 +88,10 @@ function NewReport() {
     <>
       <Container maxWidth="lg" className={classes.rootcontainer}>
         <Grid container={true} className={classes.container}>
-          <Grid item={true} xs={12} md={12} lg={12}>
+          <Grid item={true} className={classes.grid} xs={12} md={12} lg={12}>
             <div className={classes.listImg}>
               <Typography variant="h4" color="textSecondary" className={classes.listText}>New Report</Typography>
             </div>
-          </Grid>
-          <Grid item={true} xs={12} md={12} lg={12}>
             <Paper style={{ textAlign: "right" }}>
               <Grid container={true} className={classes.container}>
                 <Grid item={true} className={classes.grid} xs={6} md={6} lg={6}>
