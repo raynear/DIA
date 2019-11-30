@@ -81,6 +81,12 @@ const useStyles = makeStyles((theme: Theme) =>
       textAlign: "center"
 
     },
+    gridContents: {
+      margin: theme.spacing(0),
+      padding: theme.spacing(1),
+      textAlign: "center",
+      verticalAlign: "middle"
+    },
     grid: {
       margin: theme.spacing(0),
       padding: theme.spacing(0),

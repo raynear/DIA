@@ -30,7 +30,7 @@ function LandingPage() {
           <br />
           <Typography variant="h4" className={classes.mainCopy}>Diamond is forever</Typography>
         </div>
-        <Parallax y={[5, -30]}>
+        <Parallax y={[0, -30]}>
           <Paper className={classes.paper}>
             <LandingContents />
           </Paper>

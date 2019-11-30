@@ -1,186 +1,42 @@
-const NFTContractAddress = "0x32B1d2aD8d38f35F651834E6Df08D08EcaC62303";
-const reportContractAddress = "0x030C80d044091b4F83b25866E4350ED88B43E5Bf";
-const marketContractAddress = "0x8569C52610db1452F5D98dB9a04faa6F9e78d631";
+/*
+DiaStableCoin : 0xF0502E151076A6a1a38e1689e7B13fC73d7942D8
+Pool : 0x7002B18b24E556c9da329e247B1E77a6F55A3add
+Market : 0xbdFF61c24e8A0F8a8770e30E172E40a19a77bCf2
+
+ReportRegistry : 0x542e4382C18865618B73fBb294AA0B4783Bad10E
+DiaShieldNFT : 0xbbBA22b4fF18a8cdd7b74b5aA207D7195c3b970D
+
+*/
+const NFTContractAddress = "0xbbBA22b4fF18a8cdd7b74b5aA207D7195c3b970D";
+const marketContractAddress = "0x692a70D2e424a56D2C6C27aA97D1a86395877b3A";
+const reportContractAddress = "0x542e4382C18865618B73fBb294AA0B4783Bad10E";
 
 const NFTABI = [
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "name": "merkleTree",
-    "outputs": [
-      {
-        "name": "",
-        "type": "bytes27"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function",
-    "signature": "0x0df0ff90"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "",
-        "type": "bytes32"
-      }
-    ],
-    "name": "nullifiers",
-    "outputs": [
-      {
-        "name": "",
-        "type": "bytes32"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function",
-    "signature": "0x2997e86b"
-  },
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "leafCount",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function",
-    "signature": "0x30e69fc3"
-  },
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "latestRoot",
-    "outputs": [
-      {
-        "name": "",
-        "type": "bytes32"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function",
-    "signature": "0xd7b0fef1"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "name": "treeLUT",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function",
-    "signature": "0xd9e7c14b"
-  },
-  {
-    "inputs": [
-      {
-        "name": "_anchorRegistry",
-        "type": "address"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "constructor",
-    "signature": "constructor"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
-        "name": "from",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "name": "to",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "name": "token_id",
-        "type": "bytes32"
-      },
-      {
-        "indexed": false,
-        "name": "commitment",
-        "type": "bytes32"
-      },
-      {
-        "indexed": false,
-        "name": "commitment_index",
-        "type": "uint256"
-      }
-    ],
-    "name": "Mint",
-    "type": "event",
-    "signature": "0x2a51231361b5b18fc70d285342d3e5bac50e0e37d31b0b7e291ba9e354f72b9d"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
-        "name": "nullifier",
-        "type": "bytes32"
-      },
-      {
-        "indexed": false,
-        "name": "commitment",
-        "type": "bytes32"
-      },
-      {
-        "indexed": false,
-        "name": "commitment_index",
-        "type": "uint256"
-      }
-    ],
-    "name": "Transfer",
-    "type": "event",
-    "signature": "0xbc7a322f72742a0c810e1f76615f57ed3a5bbfcbd956d3d451b3158968faace9"
-  },
   {
     "constant": false,
     "inputs": [
       {
+        "internalType": "uint256[]",
         "name": "_proof",
         "type": "uint256[]"
       },
       {
+        "internalType": "uint256[]",
         "name": "_inputs",
         "type": "uint256[]"
       },
       {
+        "internalType": "bytes32",
         "name": "_reportRoot",
         "type": "bytes32"
       },
       {
+        "internalType": "bytes32",
         "name": "_tokenId",
         "type": "bytes32"
       },
       {
+        "internalType": "bytes32",
         "name": "_commitment",
         "type": "bytes32"
       }
@@ -189,29 +45,33 @@ const NFTABI = [
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
-    "type": "function",
-    "signature": "0x59f0df93"
+    "type": "function"
   },
   {
     "constant": false,
     "inputs": [
       {
+        "internalType": "uint256[]",
         "name": "_proof",
         "type": "uint256[]"
       },
       {
+        "internalType": "uint256[]",
         "name": "_inputs",
         "type": "uint256[]"
       },
       {
+        "internalType": "bytes32",
         "name": "_root",
         "type": "bytes32"
       },
       {
+        "internalType": "bytes32",
         "name": "_nullifier",
         "type": "bytes32"
       },
       {
+        "internalType": "bytes32",
         "name": "_commitment",
         "type": "bytes32"
       }
@@ -220,194 +80,127 @@ const NFTABI = [
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
-    "type": "function",
-    "signature": "0xab6f2d7e"
-  }
-];
-
-const playerRoleContractAddress = "0xFCd8f415ce3eC782501a89137A9b476e91dafa83";
-const playerRoleABI = [
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "internalType": "address[]",
-        "name": "_gemologists",
-        "type": "address[]"
-      }
-    ],
-    "name": "addGemologists",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
-    "constant": false,
-    "inputs": [
-      {
-        "internalType": "address[]",
-        "name": "_retailers",
-        "type": "address[]"
-      }
-    ],
-    "name": "addRetailers",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "internalType": "address[]",
-        "name": "_wholesalers",
-        "type": "address[]"
-      }
-    ],
-    "name": "addWholesalers",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": false,
     "inputs": [
       {
         "internalType": "address",
-        "name": "player",
+        "name": "_anchorRegistry",
         "type": "address"
       }
     ],
-    "name": "checkGemologist",
-    "outputs": [
-      {
-        "internalType": "bool",
-        "name": "",
-        "type": "bool"
-      }
-    ],
     "payable": false,
     "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "player",
-        "type": "address"
-      }
-    ],
-    "name": "checkRetailer",
-    "outputs": [
-      {
-        "internalType": "bool",
-        "name": "",
-        "type": "bool"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "player",
-        "type": "address"
-      }
-    ],
-    "name": "checkWholesaler",
-    "outputs": [
-      {
-        "internalType": "bool",
-        "name": "",
-        "type": "bool"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [],
-    "name": "renounceOwnership",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "newOwner",
-        "type": "address"
-      }
-    ],
-    "name": "transferOwnership",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
+    "type": "constructor"
   },
   {
     "anonymous": false,
     "inputs": [
       {
-        "indexed": true,
+        "indexed": false,
         "internalType": "address",
-        "name": "previousOwner",
+        "name": "from",
         "type": "address"
       },
       {
-        "indexed": true,
+        "indexed": false,
         "internalType": "address",
-        "name": "newOwner",
+        "name": "to",
         "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "bytes32",
+        "name": "token_id",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "internalType": "bytes32",
+        "name": "commitment",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "commitment_index",
+        "type": "uint256"
       }
     ],
-    "name": "OwnershipTransferred",
+    "name": "Mint",
     "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "bytes32",
+        "name": "nullifier",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "internalType": "bytes32",
+        "name": "commitment",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "commitment_index",
+        "type": "uint256"
+      }
+    ],
+    "name": "Transfer",
+    "type": "event"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "latestRoot",
+    "outputs": [
+      {
+        "internalType": "bytes32",
+        "name": "",
+        "type": "bytes32"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "leafCount",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
   },
   {
     "constant": true,
     "inputs": [
       {
-        "internalType": "address",
-        "name": "player",
-        "type": "address"
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
       }
     ],
-    "name": "checkPlayerRole",
+    "name": "merkleTree",
     "outputs": [
       {
-        "internalType": "enum PlayerRole.Role[]",
+        "internalType": "bytes27",
         "name": "",
-        "type": "uint8[]"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "isOwner",
-    "outputs": [
-      {
-        "internalType": "bool",
-        "name": "",
-        "type": "bool"
+        "type": "bytes27"
       }
     ],
     "payable": false,
@@ -416,13 +209,40 @@ const playerRoleABI = [
   },
   {
     "constant": true,
-    "inputs": [],
-    "name": "owner",
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "",
+        "type": "bytes32"
+      }
+    ],
+    "name": "nullifiers",
     "outputs": [
       {
-        "internalType": "address",
+        "internalType": "bytes32",
         "name": "",
-        "type": "address"
+        "type": "bytes32"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "treeLUT",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
       }
     ],
     "payable": false,
@@ -431,8 +251,7 @@ const playerRoleABI = [
   }
 ];
 
-const contractAddress = "0xc4be81B466F8cd2Eb2C245E58e28bbA7F571E33e";
-const abi = [
+const marketABI = [
   {
     "constant": false,
     "inputs": [
@@ -457,6 +276,11 @@ const abi = [
         "type": "string"
       },
       {
+        "internalType": "bytes32",
+        "name": "reportRoot",
+        "type": "bytes32"
+      },
+      {
         "internalType": "uint32",
         "name": "price",
         "type": "uint32"
@@ -475,6 +299,48 @@ const abi = [
         "internalType": "uint256",
         "name": "itemId",
         "type": "uint256"
+      }
+    ],
+    "name": "rentDiamond",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "itemId",
+        "type": "uint256"
+      }
+    ],
+    "name": "returnDiamond",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "itemId",
+        "type": "uint256"
       },
       {
         "internalType": "enum Market.DiaStatus",
@@ -482,22 +348,117 @@ const abi = [
         "type": "uint8"
       }
     ],
-    "name": "transitState",
+    "name": "transitStatus",
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
     "type": "function"
   },
   {
-    "inputs": [],
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "fundPool",
+        "type": "address"
+      }
+    ],
     "payable": false,
     "stateMutability": "nonpayable",
     "type": "constructor"
   },
   {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "itemId",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "cut",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "color",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "clarity",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "carat",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint32",
+        "name": "price",
+        "type": "uint32"
+      }
+    ],
+    "name": "Register",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "itemId",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint32",
+        "name": "price",
+        "type": "uint32"
+      },
+      {
+        "indexed": false,
+        "internalType": "bool",
+        "name": "success",
+        "type": "bool"
+      }
+    ],
+    "name": "Deposit",
+    "type": "event"
+  },
+  {
     "constant": true,
     "inputs": [],
-    "name": "getDiamonds",
+    "name": "addrFundPool",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "itemId",
+        "type": "uint256"
+      }
+    ],
+    "name": "getDiamond",
     "outputs": [
       {
         "components": [
@@ -532,14 +493,69 @@ const abi = [
             "type": "uint32"
           },
           {
+            "internalType": "bytes32",
+            "name": "reportRoot",
+            "type": "bytes32"
+          },
+          {
             "internalType": "enum Market.DiaStatus",
             "name": "status",
             "type": "uint8"
           }
         ],
-        "internalType": "struct Market.OpenData[]",
+        "internalType": "struct Market.OpenData",
         "name": "",
-        "type": "tuple[]"
+        "type": "tuple"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "getDiamonds",
+    "outputs": [
+      {
+        "internalType": "uint256[]",
+        "name": "",
+        "type": "uint256[]"
+      },
+      {
+        "internalType": "string[]",
+        "name": "",
+        "type": "string[]"
+      },
+      {
+        "internalType": "string[]",
+        "name": "",
+        "type": "string[]"
+      },
+      {
+        "internalType": "string[]",
+        "name": "",
+        "type": "string[]"
+      },
+      {
+        "internalType": "string[]",
+        "name": "",
+        "type": "string[]"
+      },
+      {
+        "internalType": "uint256[]",
+        "name": "",
+        "type": "uint256[]"
+      },
+      {
+        "internalType": "bytes32[]",
+        "name": "",
+        "type": "bytes32[]"
+      },
+      {
+        "internalType": "enum Market.DiaStatus[]",
+        "name": "",
+        "type": "uint8[]"
       }
     ],
     "payable": false,
@@ -548,293 +564,12 @@ const abi = [
   }
 ];
 
-const marketABI = [
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "addrFundPool",
-    "outputs": [
-      {
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function",
-    "signature": "0x9c166fbd"
-  },
-  {
-    "inputs": [
-      {
-        "name": "fundPool",
-        "type": "address"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "constructor",
-    "signature": "constructor"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
-        "name": "itemId",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "name": "cut",
-        "type": "string"
-      },
-      {
-        "indexed": false,
-        "name": "color",
-        "type": "string"
-      },
-      {
-        "indexed": false,
-        "name": "clarity",
-        "type": "string"
-      },
-      {
-        "indexed": false,
-        "name": "carat",
-        "type": "string"
-      },
-      {
-        "indexed": false,
-        "name": "price",
-        "type": "uint32"
-      }
-    ],
-    "name": "Register",
-    "type": "event",
-    "signature": "0x058a7142437a9d6ec41a4bee94a1ee7832a112ce70b6c70d33d9b0de860cc922"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
-        "name": "itemId",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "name": "price",
-        "type": "uint32"
-      },
-      {
-        "indexed": false,
-        "name": "success",
-        "type": "bool"
-      }
-    ],
-    "name": "Deposit",
-    "type": "event",
-    "signature": "0x32295dfcbea6190a89d19b43ea24624ca3500aeb96365456d3ee86e6ee6af190"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "cut",
-        "type": "string"
-      },
-      {
-        "name": "color",
-        "type": "string"
-      },
-      {
-        "name": "clarity",
-        "type": "string"
-      },
-      {
-        "name": "carat",
-        "type": "string"
-      },
-      {
-        "name": "reportRoot",
-        "type": "bytes32"
-      },
-      {
-        "name": "price",
-        "type": "uint32"
-      }
-    ],
-    "name": "register",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function",
-    "signature": "0xb46c87e3"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "itemId",
-        "type": "uint256"
-      }
-    ],
-    "name": "getDiamond",
-    "outputs": [
-      {
-        "components": [
-          {
-            "name": "itemId",
-            "type": "uint256"
-          },
-          {
-            "name": "cut",
-            "type": "string"
-          },
-          {
-            "name": "color",
-            "type": "string"
-          },
-          {
-            "name": "clarity",
-            "type": "string"
-          },
-          {
-            "name": "carat",
-            "type": "string"
-          },
-          {
-            "name": "price",
-            "type": "uint32"
-          },
-          {
-            "name": "reportRoot",
-            "type": "bytes32"
-          },
-          {
-            "name": "status",
-            "type": "uint8"
-          }
-        ],
-        "name": "",
-        "type": "tuple"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function",
-    "signature": "0xe3ed14db"
-  },
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "getDiamonds",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256[]"
-      },
-      {
-        "name": "",
-        "type": "string[]"
-      },
-      {
-        "name": "",
-        "type": "string[]"
-      },
-      {
-        "name": "",
-        "type": "string[]"
-      },
-      {
-        "name": "",
-        "type": "string[]"
-      },
-      {
-        "name": "",
-        "type": "uint256[]"
-      },
-      {
-        "name": "",
-        "type": "bytes32[]"
-      },
-      {
-        "name": "",
-        "type": "uint8[]"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function",
-    "signature": "0xc2e41f2d"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "itemId",
-        "type": "uint256"
-      },
-      {
-        "name": "newStatus",
-        "type": "uint8"
-      }
-    ],
-    "name": "transitStatus",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function",
-    "signature": "0xd364de45"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "itemId",
-        "type": "uint256"
-      }
-    ],
-    "name": "changeDiamondStatus",
-    "outputs": [
-      {
-        "name": "",
-        "type": "bool"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function",
-    "signature": "0x551993d7"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "itemId",
-        "type": "uint256"
-      }
-    ],
-    "name": "returnDiamond",
-    "outputs": [
-      {
-        "name": "",
-        "type": "bool"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function",
-    "signature": "0xdebf65e5"
-  }
-];
-
 const reportABI = [
   {
     "constant": true,
     "inputs": [
       {
+        "internalType": "bytes4",
         "name": "interfaceId",
         "type": "bytes4"
       }
@@ -842,72 +577,77 @@ const reportABI = [
     "name": "supportsInterface",
     "outputs": [
       {
+        "internalType": "bool",
         "name": "",
         "type": "bool"
       }
     ],
     "payable": false,
     "stateMutability": "view",
-    "type": "function",
-    "signature": "0x01ffc9a7"
+    "type": "function"
   },
   {
     "constant": true,
     "inputs": [
       {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "name": "girdleCodesLUT",
-    "outputs": [
-      {
-        "name": "",
+        "internalType": "bytes32",
+        "name": "_identifier",
         "type": "bytes32"
       }
     ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function",
-    "signature": "0x9a676e8b"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
+    "name": "getAnchorById",
+    "outputs": [
       {
-        "indexed": false,
-        "name": "by",
-        "type": "address"
+        "internalType": "bytes32",
+        "name": "",
+        "type": "bytes32"
       },
       {
-        "indexed": false,
-        "name": "code",
-        "type": "bytes32"
-      }
-    ],
-    "name": "NewCommitment",
-    "type": "event",
-    "signature": "0xb03a5a3eb7a744ab6cc818ece45210e5dfe27150107ab8ba391b5f31a93c82b6"
-  },
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "size",
-    "outputs": [
-      {
+        "internalType": "bytes32",
         "name": "",
-        "type": "uint256"
+        "type": "bytes32"
       }
     ],
     "payable": false,
     "stateMutability": "view",
-    "type": "function",
-    "signature": "0x949d225d"
+    "type": "function"
   },
   {
     "constant": false,
     "inputs": [
       {
+        "internalType": "bytes32",
+        "name": "girdleCode",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "bytes32",
+        "name": "documentRoot",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "string",
+        "name": "schema",
+        "type": "string"
+      }
+    ],
+    "name": "register",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "internalType": "bytes32",
         "name": "girdleCode",
         "type": "bytes32"
       }
@@ -917,74 +657,79 @@ const reportABI = [
       {
         "components": [
           {
+            "internalType": "bytes32",
             "name": "documentRoot",
             "type": "bytes32"
           },
           {
+            "internalType": "string",
             "name": "schema",
             "type": "string"
           }
         ],
+        "internalType": "struct ReportRegistry_pp.Commitment",
         "name": "",
         "type": "tuple"
       }
     ],
     "payable": false,
     "stateMutability": "nonpayable",
-    "type": "function",
-    "signature": "0x7795820c"
+    "type": "function"
   },
   {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "girdleCode",
-        "type": "bytes32"
-      },
-      {
-        "name": "documentRoot",
-        "type": "bytes32"
-      },
-      {
-        "name": "schema",
-        "type": "string"
-      }
-    ],
-    "name": "register",
+    "constant": true,
+    "inputs": [],
+    "name": "size",
     "outputs": [
       {
+        "internalType": "uint256",
         "name": "",
-        "type": "bool"
+        "type": "uint256"
       }
     ],
     "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function",
-    "signature": "0x0e5ceb47"
+    "stateMutability": "view",
+    "type": "function"
   },
   {
     "constant": true,
     "inputs": [
       {
-        "name": "_identifier",
-        "type": "bytes32"
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
       }
     ],
-    "name": "getAnchorById",
+    "name": "girdleCodesLUT",
     "outputs": [
       {
-        "name": "",
-        "type": "bytes32"
-      },
-      {
+        "internalType": "bytes32",
         "name": "",
         "type": "bytes32"
       }
     ],
     "payable": false,
     "stateMutability": "view",
-    "type": "function",
-    "signature": "0x04d466b2"
+    "type": "function"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "by",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "bytes32",
+        "name": "code",
+        "type": "bytes32"
+      }
+    ],
+    "name": "NewCommitment",
+    "type": "event"
   }
 ];
 
@@ -993,4 +738,9 @@ const WholeSaler = "0x697d02973Ca7ca4e886c31f6600013B630Aa00D4";
 const Retailer = "0xa09550C9B7c9B0884c3296a64073E80596B718E2";
 const Investor = "0xD778e88dCF26f63D104c88056AE3c2A57FC3a0df";
 
-export { Gemmologist, WholeSaler, Retailer, Investor, NFTContractAddress, NFTABI, playerRoleContractAddress, playerRoleABI, marketContractAddress, marketABI, contractAddress, abi, reportContractAddress, reportABI };
+// const Gemmologist = "0x8a04a53B05B47D6dc3f384400A37496140a818cD";
+// const WholeSaler = "0x3095544b66Fb92C34097343ECB6148aF42fC535e";
+// const Retailer = "0x760266F026464E8d9a784E0438a8Fab83194DD86";
+// const Investor = "0xe90444895711AE970eBA83ad7186C58e51b21501";
+
+export { Gemmologist, WholeSaler, Retailer, Investor, NFTContractAddress, NFTABI, marketContractAddress, marketABI, reportContractAddress, reportABI };

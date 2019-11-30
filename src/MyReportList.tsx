@@ -100,8 +100,9 @@ function MyReportList(props: any) {
       }
     }).then((response: any) => {
       const tmpDisplayRows = [];
+      console.log(response.data);
       for (const i in response.data) {
-        if (parseInt(i, 10) > 0) {
+        if (parseInt(i, 10) >= 0) {
           tmpDisplayRows.push({ Clarity: response.data[i].clarity, Cut: response.data[i].cut, Color: response.data[i].color, Carat: response.data[i].carat, GirdleCode: response.data[i].girdleCode, TokenID: response.data[i].tokenId });
         }
       }

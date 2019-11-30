@@ -56,6 +56,8 @@ function Report(props: any) {
             "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token"
           }
         }).then((response2: any) => {
+          console.log(response2);
+          console.log(response2.data);
           for (const i in response.data) {
             if (response.data[i].girdleCode === props.match.params.girdleCode) {
               setMyDia(true);

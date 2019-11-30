@@ -38,7 +38,7 @@ function Diamond({ match }: any) {
 
   function setMyCookieList(id: number) {
     const Cookies = document.cookie.split(";");
-    let DiaList;
+    let DiaList = [];
     for (const i in Cookies) {
       if (Cookies[i].split("=")[0].trim() === "MyDiaList") {
         DiaList = JSON.parse(Cookies[i].split("=")[1]);
@@ -64,6 +64,8 @@ function Diamond({ match }: any) {
   }
 
   function rentDia() {
+    console.log("test123");
+    console.log(match.params.ID);
     marketContract.methods.rentDiamond(parseInt(match.params.ID, 10)).send({ from: Retailer }).then((r: any) => {
       console.log(r);
       setMyCookieList(parseInt(match.params.ID, 10));
@@ -97,7 +99,7 @@ function Diamond({ match }: any) {
                 <Grid item={true} className={classes.grid} xs={12} md={6} lg={6}>
                   <Typography>Price: {values.price}</Typography>
                 </Grid>
-                <Grid item={true} className={classes.grid} xs={12} md={6} lg={6}>
+                <Grid item={true} className={classes.grid} xs={12} md={12} lg={12}>
                   <Typography>Report Hash: {values.reportHash}</Typography>
                 </Grid>
                 <Grid item={true} className={classes.grid} xs={6} md={3} lg={3}>
