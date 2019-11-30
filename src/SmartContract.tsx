@@ -8,7 +8,7 @@ DiaShieldNFT : 0xbbBA22b4fF18a8cdd7b74b5aA207D7195c3b970D
 
 */
 const NFTContractAddress = "0xbbBA22b4fF18a8cdd7b74b5aA207D7195c3b970D";
-const marketContractAddress = "0x692a70D2e424a56D2C6C27aA97D1a86395877b3A";
+const marketContractAddress = "0x4bE82FC4f07dEF398850E9611aBfd4fa574F78C2";
 const reportContractAddress = "0x542e4382C18865618B73fBb294AA0B4783Bad10E";
 
 const NFTABI = [
