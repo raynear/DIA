@@ -157,22 +157,21 @@ function DiamondList(props: any) {
     setFilter({ ...filter, [status]: !filter[status] })
   }
 
+  function inMyStorageList(id: number) {
+    const tmpList = localStorage.getItem('MyList')
+    if (tmpList) {
+      const MyList = JSON.parse(tmpList);
 
-  function inMyCookieList(id: number) {
-    const Cookies = document.cookie.split(";");
-    for (const i in Cookies) {
-      if (Cookies[i].split("=")[0].trim() === "MyDiaList") {
-        const DiaList = JSON.parse(Cookies[i].split("=")[1]);
-        if (DiaList.includes(id)) {
-          return true;
-        }
+      if (MyList.includes(id)) {
+        return true;
       }
     }
     return false;
   }
 
+
   function filtering(obj: any) {
-    if (filter.type === "My" && !inMyCookieList(parseInt(obj.ID, 10))) {
+    if (filter.type === "My" && !inMyStorageList(parseInt(obj.ID, 10))) {
       return false;
     }
     if (filter.OffSale && parseInt(obj.Status, 10) === DiaStatus.OffSale) {

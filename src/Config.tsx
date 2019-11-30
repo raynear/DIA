@@ -16,12 +16,27 @@ function Config({ match }: any) {
     }
   });
 
-  function wholeSaleCookie() {
-    document.cookie = "MyDiaList=[0,1,3,5,8,10]"
+
+  function setMyStorageList(id: number) {
+    const tmpList = localStorage.getItem('MyList')
+    if (tmpList) {
+      const MyList = JSON.parse(tmpList);
+
+      if (!MyList.includes(id)) {
+        MyList.push(id);
+      }
+      localStorage.setItem('MyList', JSON.stringify(MyList));
+    } else {
+      localStorage.setItem('MyList', '[' + id.toString() + ']')
+    }
   }
 
-  function retailCookie() {
-    document.cookie = "RentedDiaList=[1,3,5,8,10]"
+  function setStorage() {
+    setMyStorageList(0);
+    setMyStorageList(1);
+    setMyStorageList(3);
+    setMyStorageList(5);
+    setMyStorageList(8);
   }
 
   return (
@@ -32,10 +47,7 @@ function Config({ match }: any) {
             <Paper style={{ textAlign: "right" }}>
               <Grid container={true} className={classes.container}>
                 <Grid item={true} className={classes.grid} xs={6} md={6} lg={6}>
-                  <Button fullWidth={true} variant="contained" color="primary" onClick={wholeSaleCookie}>도매상 쿠키 설정</Button>
-                </Grid>
-                <Grid item={true} className={classes.grid} xs={6} md={6} lg={6}>
-                  <Button fullWidth={true} variant="contained" color="primary" onClick={retailCookie}>소매상 쿠키 설정</Button>
+                  <Button fullWidth={true} variant="contained" color="primary" onClick={setStorage}>Storage 설정</Button>
                 </Grid>
               </Grid>
             </Paper>

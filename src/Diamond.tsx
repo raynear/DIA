@@ -5,17 +5,18 @@ import { Typography, Container, Grid, Paper, Button } from "@material-ui/core";
 import Web3 from "web3";
 
 import useStyles from "./Style";
-import { marketContractAddress, marketABI, Retailer } from "./SmartContract";
+import { poolContractAddress, poolABI, marketContractAddress, marketABI, Retailer } from "./SmartContract";
 // import { ContractAddress, ContractABI } from "./ContractInfo";
 
 
 // interface FourC { clarity: '', cut: '', carat: '', color: '' }
 
-function Diamond({ match }: any) {
+function Diamond(props: any) {
   const classes = useStyles();
-  //  const id = match.params.id;
+  const id = parseInt(props.match.params.ID, 10);
   const web3 = new Web3((window as any).web3.currentProvider);
   const marketContract = new web3.eth.Contract(marketABI as any, marketContractAddress);
+  const poolContract = new web3.eth.Contract(poolABI as any, poolContractAddress);
 
   const [values, setValues] = useState({ clarity: '', cut: '', carat: '', color: '', price: 0, id: '', reportHash: '' })
   const [inMyList, setInMyList] = useState(false);
@@ -23,11 +24,11 @@ function Diamond({ match }: any) {
 
   useEffect(() => {
 
-    marketContract.methods.getDiamond(match.params.ID).call().then((r: any) => {
+    marketContract.methods.getDiamond(props.match.params.ID).call().then((r: any) => {
       setValues({ clarity: r[1], cut: r[2], carat: r[3], color: r[4], price: r[5], id: r[0], reportHash: r[6] })
     });
 
-    setInMyList(inMyCookieList(parseInt(match.params.ID, 10)));
+    setInMyList(inMyStorageList(id));
   }, [])
 
   window.addEventListener('load', async () => {
@@ -36,39 +37,49 @@ function Diamond({ match }: any) {
     }
   });
 
-  function setMyCookieList(id: number) {
-    const Cookies = document.cookie.split(";");
-    let DiaList = [];
-    for (const i in Cookies) {
-      if (Cookies[i].split("=")[0].trim() === "MyDiaList") {
-        DiaList = JSON.parse(Cookies[i].split("=")[1]);
-        if (!DiaList.includes(id)) {
-          DiaList.push(id);
-        }
+  function setMyStorageList(aid: number) {
+    const tmpList = localStorage.getItem('MyList')
+    if (tmpList) {
+      const MyList = JSON.parse(tmpList);
+
+      if (!MyList.includes(aid)) {
+        MyList.push(aid);
       }
+      localStorage.setItem('MyList', JSON.stringify(MyList));
+    } else {
+      localStorage.setItem('MyList', '[' + aid.toString() + ']')
     }
-    document.cookie = "MyDiaList=" + JSON.stringify(DiaList);
   }
 
-  function inMyCookieList(id: number) {
-    const Cookies = document.cookie.split(";");
-    for (const i in Cookies) {
-      if (Cookies[i].split("=")[0].trim() === "MyDiaList") {
-        const DiaList = JSON.parse(Cookies[i].split("=")[1]);
-        if (DiaList.includes(id)) {
-          return true;
-        }
+  function removeMyStorageList(aid: number) {
+    const tmpList = localStorage.getItem('MyList')
+    if (tmpList) {
+      const MyList = JSON.parse(tmpList);
+
+      if (MyList.includes(aid)) {
+        MyList.pop(aid);
+      }
+      localStorage.setItem('MyList', JSON.stringify(MyList));
+    }
+  }
+
+  function inMyStorageList(aid: number) {
+    const tmpList = localStorage.getItem('MyList')
+    if (tmpList) {
+      const MyList = JSON.parse(tmpList);
+
+      if (MyList.includes(aid)) {
+        return true;
       }
     }
     return false;
   }
 
   function rentDia() {
-    console.log("test123");
-    console.log(match.params.ID);
-    marketContract.methods.rentDiamond(parseInt(match.params.ID, 10)).send({ from: Retailer }).then((r: any) => {
+    marketContract.methods.rentDiamond(id).send({ from: Retailer }).then((r: any) => {
       console.log(r);
-      setMyCookieList(parseInt(match.params.ID, 10));
+      setMyStorageList(id);
+      setInMyList(true);
     });
   }
 
@@ -78,8 +89,10 @@ function Diamond({ match }: any) {
 
   function submit() {
     console.log("submit");
-    marketContract.methods.sattleforDeposit(parseInt(match.params.ID, 10), 10).send({ from: Retailer }).then((r: any) => {
+    poolContract.methods.sattleforDeposit(id, 10).send({ from: Retailer }).then((r: any) => {
       console.log(r);
+      removeMyStorageList(id);
+      props.history.push("/DIA/DiamondList/");
     })
   }
 

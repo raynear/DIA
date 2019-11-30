@@ -10,6 +10,7 @@ DiaShieldNFT : 0xbbBA22b4fF18a8cdd7b74b5aA207D7195c3b970D
 const NFTContractAddress = "0xbbBA22b4fF18a8cdd7b74b5aA207D7195c3b970D";
 const marketContractAddress = "0x4bE82FC4f07dEF398850E9611aBfd4fa574F78C2";
 const reportContractAddress = "0x542e4382C18865618B73fBb294AA0B4783Bad10E";
+const poolContractAddress = "0x7002B18b24E556c9da329e247B1E77a6F55A3add";
 
 const NFTABI = [
   {
@@ -733,6 +734,158 @@ const reportABI = [
   }
 ];
 
+const poolABI = [
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "profits",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "availableDeposit",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "deposit",
+        "type": "uint256"
+      }
+    ],
+    "name": "investForDiaTx",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "investor",
+        "type": "address"
+      }
+    ],
+    "name": "caculateProfit",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "itemId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "settleforDeposit",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "itemId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "requestDeposit",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "totalDeposit",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "token",
+        "type": "address"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  }
+];
+
 const Gemmologist = "0x6304Dfe18f9C9e345300e5E6D4112DF1F426dE46";
 const WholeSaler = "0x697d02973Ca7ca4e886c31f6600013B630Aa00D4";
 const Retailer = "0xa09550C9B7c9B0884c3296a64073E80596B718E2";
@@ -743,4 +896,4 @@ const Investor = "0xD778e88dCF26f63D104c88056AE3c2A57FC3a0df";
 // const Retailer = "0x760266F026464E8d9a784E0438a8Fab83194DD86";
 // const Investor = "0xe90444895711AE970eBA83ad7186C58e51b21501";
 
-export { Gemmologist, WholeSaler, Retailer, Investor, NFTContractAddress, NFTABI, marketContractAddress, marketABI, reportContractAddress, reportABI };
+export { Gemmologist, WholeSaler, Retailer, Investor, NFTContractAddress, NFTABI, marketContractAddress, marketABI, reportContractAddress, reportABI, poolContractAddress, poolABI };
